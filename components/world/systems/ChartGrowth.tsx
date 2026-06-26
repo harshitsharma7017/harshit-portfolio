@@ -1,0 +1,40 @@
+"use client";
+
+import { useFrame } from "@react-three/fiber";
+import { useRef } from "react";
+import * as THREE from "three";
+
+interface ChartGrowthProps {
+  offset: [number, number, number];
+  active: boolean;
+  progress: number;
+}
+
+const BAR_HEIGHTS = [1.2, 0.8, 1.6, 0.5, 1.0, 1.4];
+
+export function ChartGrowth({ offset, active, progress }: ChartGrowthProps) {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame(() => {
+    if (!groupRef.current || !active) return;
+    groupRef.current.children.forEach((child, i) => {
+      const mesh = child as THREE.Mesh;
+      const targetHeight = BAR_HEIGHTS[i] * Math.min(1, Math.max(0, (progress - 0.3) * 1.5));
+      mesh.scale.y = THREE.MathUtils.lerp(mesh.scale.y, targetHeight, 0.05);
+      mesh.position.y = (mesh.scale.y * BAR_HEIGHTS[i]) / 2;
+    });
+  });
+
+  if (!active) return null;
+
+  return (
+    <group ref={groupRef} position={offset}>
+      {BAR_HEIGHTS.map((height, i) => (
+        <mesh key={i} position={[i * 0.5 - 1.25, 0, 0]} scale={[1, 0.01, 1]}>
+          <boxGeometry args={[0.25, height, 0.25]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.6} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
