@@ -8,24 +8,24 @@ export const CAMERA_ANCHORS: Record<string, CameraAnchor> = {
     fov: 50,
   },
   backend: {
-    position: [0, 3, -12],
-    lookAt: [0, 1, -20],
-    fov: 45,
-  },
-  database: {
-    position: [4, 4, -32],
-    lookAt: [0, 0, -40],
+    position: [3, 4, -15],
+    lookAt: [0, 2, -20],
     fov: 42,
   },
-  eqas: {
-    position: [-3, 3, -47],
-    lookAt: [0, 0, -55],
+  database: {
+    position: [3, 2.5, -34],
+    lookAt: [0, 1, -40],
     fov: 40,
   },
+  eqas: {
+    position: [2, 3.5, -49],
+    lookAt: [-1, 0.5, -55],
+    fov: 44,
+  },
   citycore: {
-    position: [0, 6, -62],
-    lookAt: [0, 0, -70],
-    fov: 48,
+    position: [12, 10, -50],
+    lookAt: [0, 0, -62],
+    fov: 45,
   },
   projects: {
     position: [0, 2, -82],

@@ -1,6 +1,9 @@
 "use client";
 
-import { CityGraph } from "@/components/world/systems/CityGraph";
+import { CityGroundGrid } from "@/components/world/systems/CityGroundGrid";
+import { CityArchitecture } from "@/components/world/systems/CityArchitecture";
+import { CityLogisticsFlow } from "@/components/world/systems/CityLogisticsFlow";
+import { CityLighting } from "@/components/world/systems/CityLighting";
 import { useExperienceContext } from "@/components/providers/ExperienceProvider";
 import { getZoneById } from "@/data/zoneConfig";
 
@@ -11,11 +14,10 @@ export function CityCoreZone() {
 
   return (
     <group position={[0, 0, zone.zPosition]}>
-      <mesh position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[12, 12]} />
-        <meshBasicMaterial color="#0f0f0f" />
-      </mesh>
-      <CityGraph offset={[0, 0, 0]} active={active} />
+      <CityLighting active={active} />
+      <CityGroundGrid active={active} />
+      <CityArchitecture active={active} />
+      <CityLogisticsFlow active={active} />
     </group>
   );
 }

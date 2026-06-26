@@ -1,6 +1,8 @@
 "use client";
 
-import { InstancedPacketStream } from "@/components/world/systems/InstancedPacketStream";
+import { ServerCore } from "@/components/world/systems/ServerCore";
+import { BackendPacketFlow } from "@/components/world/systems/BackendPacketFlow";
+import { BackendLighting } from "@/components/world/systems/BackendLighting";
 import { useExperienceContext } from "@/components/providers/ExperienceProvider";
 import { useHoverThroughput } from "@/components/hooks/useHoverThroughput";
 import { getZoneById } from "@/data/zoneConfig";
@@ -15,18 +17,14 @@ export function BackendZone() {
 
   return (
     <group position={[0, 0, zone.zPosition]}>
-      <mesh position={[0, 1, 0]}>
-        <boxGeometry args={[3, 4, 3]} />
-        <meshBasicMaterial color="#111111" wireframe transparent opacity={0.6} />
-      </mesh>
-      <mesh position={[0, 1, 0]}>
-        <boxGeometry args={[2, 3, 2]} />
-        <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.15} />
-      </mesh>
-      <InstancedPacketStream
-        origin={[0, 0, 8]}
-        target={[0, 1, 0]}
+      <BackendLighting active={active} />
+      <ServerCore
         active={active}
+        throughputMultiplier={state.throughputMultiplier}
+      />
+      <BackendPacketFlow
+        active={active}
+        throughputMultiplier={state.throughputMultiplier}
       />
     </group>
   );
