@@ -11,7 +11,6 @@ export function TerminalMesh({
   scale = 1,
   active = true,
 }: TerminalMeshProps) {
-  if (!active) return null;
 
   return (
     <group position={position} scale={scale}>

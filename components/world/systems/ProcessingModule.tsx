@@ -170,7 +170,6 @@ export function ProcessingModule({
     }
   });
 
-  if (!active) return null;
 
   return (
     <group position={position}>

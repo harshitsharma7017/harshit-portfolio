@@ -156,7 +156,6 @@ export function CityLogisticsFlow({ active }: CityLogisticsFlowProps) {
     return routes;
   }, [state.hoverNodeId]);
 
-  if (!active) return null;
 
   return (
     <group>

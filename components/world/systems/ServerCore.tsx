@@ -94,7 +94,6 @@ export function ServerCore({ active, throughputMultiplier }: ServerCoreProps) {
     });
   });
 
-  if (!active) return null;
 
   // Collect LED refs across all tiers
   let globalLedIdx = 0;

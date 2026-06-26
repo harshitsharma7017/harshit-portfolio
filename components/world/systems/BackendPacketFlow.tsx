@@ -215,7 +215,6 @@ export function BackendPacketFlow({
     });
   });
 
-  if (!active) return null;
 
   return (
     <group>

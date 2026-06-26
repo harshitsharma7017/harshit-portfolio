@@ -1,0 +1,29 @@
+
+> harshit-portfolio@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.9 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.4:3000
+✓ Ready in 232ms
+
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 177ms (next.js: 71ms, application-code: 106ms)
+✓ Compiled in 73ms
+ GET / 200 in 33ms (next.js: 20ms, application-code: 13ms)
+ GET / 200 in 38ms (next.js: 828µs, application-code: 37ms)
+ GET / 200 in 31ms (next.js: 26ms, application-code: 5ms)
+ GET / 200 in 32ms (next.js: 19ms, application-code: 12ms)
+ GET / 200 in 38ms (next.js: 659µs, application-code: 37ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 45ms (next.js: 11ms, application-code: 34ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 68ms (next.js: 41ms, application-code: 28ms)
+✓ Compiled in 0ms
+ GET / 200 in 40ms (next.js: 4ms, application-code: 36ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 36ms (next.js: 6ms, application-code: 31ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[?25h

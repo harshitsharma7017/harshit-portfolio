@@ -64,7 +64,6 @@ export function CityArchitecture({ active }: CityArchitectureProps) {
     });
   });
 
-  if (!active) return null;
 
   return (
     <group>

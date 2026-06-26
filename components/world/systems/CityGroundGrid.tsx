@@ -68,7 +68,6 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
     meshRef.current.instanceMatrix.needsUpdate = true;
   }, [blockData]);
 
-  if (!active) return null;
 
   return (
     <group>

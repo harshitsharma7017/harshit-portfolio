@@ -34,8 +34,8 @@ export const CAMERA_ANCHORS: Record<string, CameraAnchor> = {
   },
   contact: {
     position: [0, 1.5, -102],
-    lookAt: [0, 0, -110],
-    fov: 38,
+    lookAt: [0, 1.5, -110],
+    fov: 35,
   },
 };
 
