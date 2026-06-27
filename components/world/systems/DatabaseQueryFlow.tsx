@@ -49,13 +49,12 @@ export function DatabaseQueryFlow({
   const material = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
-        color: "#000000",
+        color: "#ffffff",
         emissive: "#ffffff",
-        emissiveIntensity: 0.8,
+        emissiveIntensity: 1.2,
         transparent: true,
         opacity: 0.85,
-        roughness: 0.3,
-        metalness: 0.5,
+        toneMapped: false,
       }),
     []
   );

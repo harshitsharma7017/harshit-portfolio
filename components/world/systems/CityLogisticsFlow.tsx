@@ -30,11 +30,12 @@ export function CityLogisticsFlow({ active }: CityLogisticsFlowProps) {
   const material = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
-        color: "#000000",
+        color: "#ffffff",
         emissive: "#ffffff",
-        emissiveIntensity: 0.8,
+        emissiveIntensity: 1.0,
         transparent: true,
         opacity: 0.9,
+        toneMapped: false,
       }),
     []
   );

@@ -105,8 +105,9 @@ export function CityGraph({ offset, active }: CityGraphProps) {
             onPointerOut={() => setHoverNode(null)}
           >
             <boxGeometry args={[isHovered ? 1.1 : 0.9, height, isHovered ? 1.1 : 0.9]} />
-            <meshBasicMaterial
-              color="#ffffff"
+            <meshPhysicalMaterial
+              color="#000000" metalness={0.85} roughness={0.1}
+              transmission={0.9} clearcoat={1.0} clearcoatRoughness={0.05}
               transparent
               opacity={isHighlighted ? 0.95 : 0.35}
             />

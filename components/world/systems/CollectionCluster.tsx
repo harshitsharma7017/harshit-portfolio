@@ -115,11 +115,11 @@ export function CollectionCluster({
       <mesh>
         <icosahedronGeometry args={[radius, 1]} />
         <meshStandardMaterial
-          color="#0a0a0a"
-          roughness={0.25}
-          metalness={0.9}
+          color="#111111"
+          roughness={0.5}
+          metalness={0.7}
           transparent
-          opacity={0.15}
+          opacity={0.4}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -127,11 +127,13 @@ export function CollectionCluster({
       {/* Wireframe overlay — faceted edge lines */}
       <mesh>
         <icosahedronGeometry args={[radius * 1.002, 1]} />
-        <meshBasicMaterial
-          color="#ffffff"
+        <meshStandardMaterial
+          color="#222222"
           wireframe
+          roughness={0.3}
+          metalness={0.9}
           transparent
-          opacity={0.07}
+          opacity={0.1}
         />
       </mesh>
 
@@ -139,22 +141,24 @@ export function CollectionCluster({
       <mesh ref={innerRef}>
         <icosahedronGeometry args={[radius * 0.55, 1]} />
         <meshStandardMaterial
-          color="#0c0c0c"
-          roughness={0.3}
-          metalness={0.8}
+          color="#080808"
+          roughness={0.95}
+          metalness={0.15}
           transparent
-          opacity={0.25 + activityLevel * 0.15}
+          opacity={0.85}
         />
       </mesh>
 
       {/* Inner core wireframe — document structure hint */}
       <mesh ref={innerRef ? undefined : undefined}>
         <icosahedronGeometry args={[radius * 0.56, 2]} />
-        <meshBasicMaterial
-          color="#ffffff"
+        <meshStandardMaterial
+          color="#222222"
           wireframe
+          roughness={0.3}
+          metalness={0.9}
           transparent
-          opacity={0.04}
+          opacity={0.06}
         />
       </mesh>
 
@@ -169,11 +173,12 @@ export function CollectionCluster({
         >
           <sphereGeometry args={[radius * 0.025, 6, 6]} />
           <meshStandardMaterial
-            color="#000000"
+            color="#ffffff"
             emissive="#ffffff"
-            emissiveIntensity={0.3}
+            emissiveIntensity={1.4}
             transparent
-            opacity={0.5}
+            opacity={0.8}
+            toneMapped={false}
           />
         </mesh>
       ))}
@@ -185,12 +190,13 @@ export function CollectionCluster({
       >
         <ringGeometry args={[radius * 0.9, radius * 1.1, 48]} />
         <meshStandardMaterial
-          color="#000000"
+          color="#ffffff"
           emissive="#ffffff"
           emissiveIntensity={0}
           transparent
           opacity={0}
           side={THREE.DoubleSide}
+          toneMapped={false}
         />
       </mesh>
     </group>

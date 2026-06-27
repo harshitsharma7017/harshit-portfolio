@@ -153,13 +153,13 @@ export function RelationshipBridges({ edges, active }: RelationshipBridgesProps)
                 args={[0.015, 0.015, td.length, 6, 1]}
               />
               <meshStandardMaterial
-                color="#000000"
+                color="#111111"
                 emissive="#ffffff"
                 emissiveIntensity={0.08}
                 transparent
-                opacity={0.2}
-                roughness={0.5}
-                metalness={0.3}
+                opacity={0.5}
+                roughness={0.3}
+                metalness={0.9}
               />
             </mesh>
 
@@ -180,13 +180,12 @@ export function RelationshipBridges({ edges, active }: RelationshipBridgesProps)
               >
                 <sphereGeometry args={[0.06, 8, 8]} />
                 <meshStandardMaterial
-                  color="#000000"
+                  color="#ffffff"
                   emissive="#ffffff"
-                  emissiveIntensity={0.7}
+                  emissiveIntensity={1.5}
                   transparent
                   opacity={0.8}
-                  roughness={0.3}
-                  metalness={0.5}
+                  toneMapped={false}
                 />
               </mesh>
             ))}

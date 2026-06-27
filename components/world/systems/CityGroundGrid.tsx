@@ -75,9 +75,9 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
       <mesh position={[0, -0.05, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[40, 40]} />
         <meshStandardMaterial
-          color="#080808"
-          roughness={0.8}
-          metalness={0.2}
+          color="#060606"
+          roughness={0.98}
+          metalness={0.05}
         />
       </mesh>
 
@@ -90,9 +90,9 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
       >
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial
-          color="#121212"
-          roughness={0.9}
-          metalness={0.1}
+          color="#0a0a0a"
+          roughness={0.92}
+          metalness={0.12}
         />
       </instancedMesh>
     </group>

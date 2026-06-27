@@ -21,14 +21,17 @@ export function ProjectsZone() {
         <group>
           <mesh position={[0, 0, -3]}>
             <boxGeometry args={[6, 0.05, 6]} />
-            <meshBasicMaterial color="#0f0f0f" />
+            <meshStandardMaterial color="#080808" roughness={0.9} metalness={0.15} />
           </mesh>
           <mesh position={[0, 2, -3]}>
             <boxGeometry args={[4, 3, 0.1]} />
-            <meshBasicMaterial
+            <meshPhysicalMaterial
               color={getProjectById(selected).envColor}
               transparent
-              opacity={0.08}
+              opacity={0.3}
+              roughness={0.8}
+              transmission={0.5}
+              thickness={0.5}
             />
           </mesh>
         </group>

@@ -103,7 +103,7 @@ export function ContactTerminal({ active }: ContactTerminalProps) {
         <meshPhysicalMaterial
           color="#050505"
           metalness={0.9}
-          roughness={0.2}
+          roughness={0.15}
           clearcoat={1.0}
           clearcoatRoughness={0.1}
           transparent
@@ -114,7 +114,7 @@ export function ContactTerminal({ active }: ContactTerminalProps) {
       {/* Screen Bezel */}
       <mesh position={[0, 0, -0.06]}>
         <boxGeometry args={[10.2, 6.2, 0.05]} />
-        <meshStandardMaterial color="#020202" roughness={0.8} />
+        <meshStandardMaterial color="#111111" roughness={0.3} metalness={0.9} />
       </mesh>
 
       {/* Console Text Container */}

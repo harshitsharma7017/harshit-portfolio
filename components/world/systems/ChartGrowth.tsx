@@ -32,7 +32,7 @@ export function ChartGrowth({ offset, active, progress }: ChartGrowthProps) {
       {BAR_HEIGHTS.map((height, i) => (
         <mesh key={i} position={[i * 0.5 - 1.25, 0, 0]} scale={[1, 0.01, 1]}>
           <boxGeometry args={[0.25, height, 0.25]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.6} />
+          <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.2} transparent opacity={0.6} toneMapped={false} />
         </mesh>
       ))}
     </group>

@@ -65,13 +65,12 @@ export function BackendPacketFlow({
   const requestMat = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
-        color: "#000000",
+        color: "#ffffff",
         emissive: "#ffffff",
-        emissiveIntensity: 0.9,
+        emissiveIntensity: 1.6,
         transparent: true,
         opacity: 0.9,
-        roughness: 0.3,
-        metalness: 0.5,
+        toneMapped: false,
       }),
     []
   );
@@ -84,13 +83,12 @@ export function BackendPacketFlow({
   const responseMat = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
-        color: "#000000",
+        color: "#ffffff",
         emissive: "#ffffff",
-        emissiveIntensity: 0.4,
+        emissiveIntensity: 1.0,
         transparent: true,
-        opacity: 0.35,
-        roughness: 0.5,
-        metalness: 0.3,
+        opacity: 0.5,
+        toneMapped: false,
       }),
     []
   );

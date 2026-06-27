@@ -105,8 +105,11 @@ export function GraphNetwork({ nodes, offset, active }: GraphNetworkProps) {
               onPointerOut={() => setHoverNode(null)}
             >
               <sphereGeometry args={[isHovered ? 0.35 : 0.25, 16, 16]} />
-              <meshBasicMaterial
+              <meshStandardMaterial
                 color="#ffffff"
+                emissive="#ffffff"
+                emissiveIntensity={isHighlighted ? 1.5 : 0.3}
+                toneMapped={false}
                 transparent
                 opacity={isHighlighted ? 1 : 0.4}
               />
@@ -115,8 +118,11 @@ export function GraphNetwork({ nodes, offset, active }: GraphNetworkProps) {
             {isHovered && (
               <mesh rotation={[-Math.PI / 2, 0, 0]}>
                 <ringGeometry args={[0.5, 0.7, 32]} />
-                <meshBasicMaterial
-                  color="#555555"
+                <meshStandardMaterial
+                  color="#ffffff"
+                  emissive="#ffffff"
+                  emissiveIntensity={1.2}
+                  toneMapped={false}
                   transparent
                   opacity={0.6}
                   side={THREE.DoubleSide}

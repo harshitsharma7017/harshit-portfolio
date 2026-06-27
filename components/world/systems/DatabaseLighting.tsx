@@ -12,7 +12,7 @@ export function DatabaseLighting({ active }: DatabaseLightingProps) {
       {/* Wide rim light from behind-below — catches faceted icosahedron edges */}
       <spotLight
         position={[0, -4, -8]}
-        intensity={1.0}
+        intensity={1.5}
         angle={0.8}
         penumbra={0.9}
         color="#ffffff"
@@ -23,7 +23,7 @@ export function DatabaseLighting({ active }: DatabaseLightingProps) {
       {/* Subtle overhead fill — defines collection surfaces */}
       <pointLight
         position={[0, 10, 0]}
-        intensity={0.3}
+        intensity={0.5}
         color="#ffffff"
         distance={20}
         decay={2}
@@ -32,14 +32,14 @@ export function DatabaseLighting({ active }: DatabaseLightingProps) {
       {/* Side key — creates depth separation between near/far clusters */}
       <directionalLight
         position={[6, 3, 4]}
-        intensity={0.35}
+        intensity={0.5}
         color="#ffffff"
       />
 
       {/* Opposite side fill — prevents silhouette flatness */}
       <pointLight
         position={[-8, 0, -4]}
-        intensity={0.12}
+        intensity={0.2}
         color="#ffffff"
         distance={18}
         decay={2}

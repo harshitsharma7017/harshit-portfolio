@@ -85,17 +85,17 @@ export function CityArchitecture({ active }: CityArchitectureProps) {
                 {/* Brutalist base */}
                 <mesh position={[0, 1.0, 0]} castShadow receiveShadow>
                   <boxGeometry args={[1.6, 2.0, 1.6]} />
-                  <meshStandardMaterial color="#1a1a1a" roughness={0.8} metalness={0.2} />
+                  <meshStandardMaterial color="#080808" roughness={0.92} metalness={0.15} />
                 </mesh>
                 {/* Emissive architectural reveal */}
                 <mesh position={[0, 2.05, 0]} userData={{ isEmissive: true }}>
                   <boxGeometry args={[1.65, 0.1, 1.65]} />
-                  <meshStandardMaterial color="#000000" emissive="#ffffff" />
+                  <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.5} toneMapped={false} />
                 </mesh>
                 {/* Top block */}
                 <mesh position={[0, 2.3, 0]} castShadow receiveShadow>
                   <boxGeometry args={[1.2, 0.4, 1.2]} />
-                  <meshStandardMaterial color="#1a1a1a" roughness={0.8} />
+                  <meshStandardMaterial color="#080808" roughness={0.92} metalness={0.15} />
                 </mesh>
               </group>
             )}
@@ -105,17 +105,17 @@ export function CityArchitecture({ active }: CityArchitectureProps) {
                 {/* Tiered commercial base */}
                 <mesh position={[0, 0.4, 0]} castShadow receiveShadow>
                   <boxGeometry args={[2.0, 0.8, 2.0]} />
-                  <meshStandardMaterial color="#222222" roughness={0.7} />
+                  <meshStandardMaterial color="#0a0a0a" roughness={0.88} metalness={0.2} />
                 </mesh>
                 {/* Emissive storefront band */}
                 <mesh position={[0, 0.85, 0]} userData={{ isEmissive: true }}>
                   <boxGeometry args={[1.8, 0.1, 1.8]} />
-                  <meshStandardMaterial color="#000000" emissive="#ffffff" />
+                  <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.5} toneMapped={false} />
                 </mesh>
                 {/* Second tier */}
                 <mesh position={[0, 1.15, 0]} castShadow receiveShadow>
                   <boxGeometry args={[1.6, 0.5, 1.6]} />
-                  <meshStandardMaterial color="#222222" roughness={0.7} />
+                  <meshStandardMaterial color="#0a0a0a" roughness={0.88} metalness={0.2} />
                 </mesh>
               </group>
             )}
@@ -125,16 +125,16 @@ export function CityArchitecture({ active }: CityArchitectureProps) {
                 {/* Sleek tower */}
                 <mesh position={[0, 1.5, 0]} castShadow receiveShadow>
                   <boxGeometry args={[1.0, 3.0, 1.0]} />
-                  <meshStandardMaterial color="#151515" roughness={0.5} metalness={0.5} />
+                  <meshStandardMaterial color="#111111" roughness={0.35} metalness={0.88} />
                 </mesh>
                 {/* Vertical emissive slits */}
                 <mesh position={[0, 1.5, 0.51]} userData={{ isEmissive: true }}>
                   <boxGeometry args={[0.1, 2.8, 0.05]} />
-                  <meshStandardMaterial color="#000000" emissive="#ffffff" />
+                  <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.5} toneMapped={false} />
                 </mesh>
                 <mesh position={[0, 1.5, -0.51]} userData={{ isEmissive: true }}>
                   <boxGeometry args={[0.1, 2.8, 0.05]} />
-                  <meshStandardMaterial color="#000000" emissive="#ffffff" />
+                  <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.5} toneMapped={false} />
                 </mesh>
               </group>
             )}
@@ -144,11 +144,11 @@ export function CityArchitecture({ active }: CityArchitectureProps) {
               <group>
                 <mesh position={[0, 0.1, 0]} castShadow receiveShadow>
                   <cylinderGeometry args={[0.4, 0.5, 0.2, 16]} />
-                  <meshStandardMaterial color="#2a2a2a" roughness={0.9} />
+                  <meshStandardMaterial color="#111111" roughness={0.5} metalness={0.75} />
                 </mesh>
                 <mesh position={[0, 0.2, 0]} userData={{ isEmissive: true }}>
                   <cylinderGeometry args={[0.3, 0.3, 0.05, 16]} />
-                  <meshStandardMaterial color="#000000" emissive="#ffffff" />
+                  <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.5} toneMapped={false} />
                 </mesh>
               </group>
             )}

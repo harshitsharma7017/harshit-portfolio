@@ -46,13 +46,12 @@ export function FactoryStream({
   const material = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
-        color: "#000000",
+        color: "#ffffff",
         emissive: "#ffffff",
-        emissiveIntensity: 0.7,
+        emissiveIntensity: 1.3,
         transparent: true,
-        opacity: 0.8,
-        roughness: 0.3,
-        metalness: 0.5,
+        opacity: 0.7,
+        toneMapped: false,
       }),
     []
   );

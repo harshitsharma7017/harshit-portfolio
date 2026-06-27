@@ -13,8 +13,8 @@ export function BackendLighting({ active }: BackendLightingProps) {
       <spotLight
         position={[0, 8, -6]}
         target-position={[0, 2, 0]}
-        intensity={1.2}
-        angle={0.6}
+        intensity={1.8}
+        angle={0.5}
         penumbra={0.8}
         color="#ffffff"
         distance={25}
@@ -24,7 +24,7 @@ export function BackendLighting({ active }: BackendLightingProps) {
       {/* Subtle uplight — from below, illuminates the gaps between tiers */}
       <pointLight
         position={[0, -2, 0]}
-        intensity={0.4}
+        intensity={0.6}
         color="#ffffff"
         distance={12}
         decay={2}
@@ -33,7 +33,7 @@ export function BackendLighting({ active }: BackendLightingProps) {
       {/* Side fill — very subtle, prevents total blackout on the far side */}
       <pointLight
         position={[-5, 3, 2]}
-        intensity={0.15}
+        intensity={0.2}
         color="#ffffff"
         distance={15}
         decay={2}
@@ -42,7 +42,7 @@ export function BackendLighting({ active }: BackendLightingProps) {
       {/* Top key light — defines the surface of the tier slabs */}
       <directionalLight
         position={[2, 10, 3]}
-        intensity={0.5}
+        intensity={0.7}
         color="#ffffff"
       />
     </group>

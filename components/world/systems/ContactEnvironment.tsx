@@ -37,9 +37,10 @@ export function ContactEnvironment({ active }: ContactEnvironmentProps) {
       new THREE.MeshStandardMaterial({
         color: "#ffffff",
         emissive: "#ffffff",
-        emissiveIntensity: 0.1,
+        emissiveIntensity: 0.8,
         transparent: true,
         opacity: 0.2,
+        toneMapped: false,
       }),
     []
   );
@@ -71,7 +72,7 @@ export function ContactEnvironment({ active }: ContactEnvironmentProps) {
       {/* Intense, dramatic rim light from behind to frame the terminal */}
       <spotLight
         position={[0, 5, -8]}
-        intensity={2.0}
+        intensity={3.0}
         angle={0.9}
         penumbra={1}
         color="#ffffff"
@@ -82,7 +83,7 @@ export function ContactEnvironment({ active }: ContactEnvironmentProps) {
       {/* Extremely subtle fill to prevent complete blackness on the terminal face */}
       <directionalLight
         position={[0, 0, 10]}
-        intensity={0.03}
+        intensity={0.06}
         color="#ffffff"
       />
 

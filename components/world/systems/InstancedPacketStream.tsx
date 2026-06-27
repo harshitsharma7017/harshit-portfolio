@@ -33,10 +33,13 @@ export function InstancedPacketStream({
   const geometry = useMemo(() => new THREE.BoxGeometry(0.03, 0.03, 0.12), []);
   const material = useMemo(
     () =>
-      new THREE.MeshBasicMaterial({
+      new THREE.MeshStandardMaterial({
         color: "#ffffff",
+        emissive: "#ffffff",
+        emissiveIntensity: 1.4,
         transparent: true,
         opacity: 0.85,
+        toneMapped: false,
       }),
     []
   );

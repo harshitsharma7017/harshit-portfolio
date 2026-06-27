@@ -25,9 +25,9 @@ export function PipelineStage({ offset, active, progress }: PipelineStageProps) 
     if (!groupRef.current || !active) return;
     groupRef.current.children.forEach((child, i) => {
       const threshold = (i + 1) / STAGES.length;
-      const mat = (child as THREE.Mesh).material as THREE.MeshBasicMaterial;
+      const mat = (child as THREE.Mesh).material as THREE.MeshStandardMaterial;
       if (mat) {
-        mat.opacity = progress >= threshold - 0.15 ? 0.9 : 0.15;
+        mat.opacity = progress >= threshold - 0.15 ? 0.9 : 0.2;
       }
     });
   });
@@ -39,7 +39,7 @@ export function PipelineStage({ offset, active, progress }: PipelineStageProps) 
       {STAGES.map((_, i) => (
         <mesh key={STAGES[i]} position={[i * 1.8 - 3.6, 0, 0]}>
           <boxGeometry args={[1.2, 0.6, 0.6]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.15} />
+          <meshStandardMaterial color="#111111" roughness={0.5} metalness={0.7} transparent opacity={0.2} />
         </mesh>
       ))}
     </group>

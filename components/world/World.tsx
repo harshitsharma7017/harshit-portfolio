@@ -14,7 +14,7 @@ export function World() {
     <>
       <WorldLighting />
       <color attach="background" args={["#0a0a0a"]} />
-      <fog attach="fog" args={["#0a0a0a", 15, 80]} />
+      <fog attach="fog" args={["#0a0a0a", 25, 60]} />
       <BootZone />
       <BackendZone />
       <DatabaseZone />

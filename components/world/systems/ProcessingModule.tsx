@@ -177,29 +177,30 @@ export function ProcessingModule({
       <mesh>
         <boxGeometry args={scale} />
         <meshStandardMaterial
-          color="#0a0a0a"
-          roughness={0.3}
-          metalness={0.85}
+          color="#080808"
+          roughness={0.85}
+          metalness={0.2}
           transparent
-          opacity={0.8}
+          opacity={0.9}
         />
       </mesh>
 
       {/* Wireframe cage */}
       <mesh>
         <boxGeometry args={[scale[0] + 0.03, scale[1] + 0.03, scale[2] + 0.03]} />
-        <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.05} />
+        <meshStandardMaterial color="#111111" wireframe roughness={0.3} metalness={0.9} transparent opacity={0.12} />
       </mesh>
 
       {/* Top edge accent */}
       <mesh position={[0, scale[1] * 0.5 + 0.003, 0]}>
         <boxGeometry args={[scale[0] + 0.01, 0.004, scale[2] + 0.01]} />
         <meshStandardMaterial
-          color="#000000"
+          color="#ffffff"
           emissive="#ffffff"
-          emissiveIntensity={0.15}
+          emissiveIntensity={1.2}
           transparent
           opacity={0.25}
+          toneMapped={false}
         />
       </mesh>
 
@@ -212,11 +213,12 @@ export function ProcessingModule({
         >
           <sphereGeometry args={[0.03, 6, 6]} />
           <meshStandardMaterial
-            color="#000000"
+            color="#ffffff"
             emissive="#ffffff"
-            emissiveIntensity={0.5}
+            emissiveIntensity={1.5}
             transparent
-            opacity={0.7}
+            opacity={0.8}
+            toneMapped={false}
           />
         </mesh>
       ))}
@@ -229,13 +231,13 @@ export function ProcessingModule({
           {Array.from({ length: 5 }).map((_, i) => (
             <mesh key={`grid-h-${i}`} position={[0, scale[1] * 0.5 + 0.008, (i - 2) * (scale[2] * 0.2)]}>
               <boxGeometry args={[scale[0] * 0.85, 0.003, 0.008]} />
-              <meshStandardMaterial color="#000000" emissive="#ffffff" emissiveIntensity={0.2} transparent opacity={0.3} />
+              <meshStandardMaterial color="#111111" roughness={0.3} metalness={0.9} transparent opacity={0.5} />
             </mesh>
           ))}
           {Array.from({ length: 5 }).map((_, i) => (
             <mesh key={`grid-v-${i}`} position={[(i - 2) * (scale[0] * 0.2), scale[1] * 0.5 + 0.008, 0]}>
               <boxGeometry args={[0.008, 0.003, scale[2] * 0.85]} />
-              <meshStandardMaterial color="#000000" emissive="#ffffff" emissiveIntensity={0.2} transparent opacity={0.3} />
+              <meshStandardMaterial color="#111111" roughness={0.3} metalness={0.9} transparent opacity={0.5} />
             </mesh>
           ))}
           {/* Pulse ring on data arrival */}
@@ -246,8 +248,8 @@ export function ProcessingModule({
           >
             <ringGeometry args={[scale[0] * 0.15, scale[0] * 0.2, 32]} />
             <meshStandardMaterial
-              color="#000000" emissive="#ffffff" emissiveIntensity={0}
-              transparent opacity={0} side={THREE.DoubleSide}
+              color="#ffffff" emissive="#ffffff" emissiveIntensity={0}
+              transparent opacity={0} side={THREE.DoubleSide} toneMapped={false}
             />
           </mesh>
         </group>
@@ -258,16 +260,16 @@ export function ProcessingModule({
         <group>
           <mesh position={[0, scale[1] * 0.5 + 0.25, scale[2] * 0.2]}>
             <boxGeometry args={[scale[0] * 0.8, 0.5, 0.03]} />
-            <meshStandardMaterial color="#0c0c0c" roughness={0.3} metalness={0.8} transparent opacity={0.5} />
+            <meshStandardMaterial color="#080808" roughness={0.8} metalness={0.25} transparent opacity={0.8} />
           </mesh>
           <mesh position={[0, scale[1] * 0.5 + 0.25, -scale[2] * 0.2]}>
             <boxGeometry args={[scale[0] * 0.8, 0.5, 0.03]} />
-            <meshStandardMaterial color="#0c0c0c" roughness={0.3} metalness={0.8} transparent opacity={0.5} />
+            <meshStandardMaterial color="#080808" roughness={0.8} metalness={0.25} transparent opacity={0.8} />
           </mesh>
           {/* Gate wireframe accent */}
           <mesh position={[0, scale[1] * 0.5 + 0.5, 0]}>
             <boxGeometry args={[scale[0] * 0.82, 0.01, scale[2] * 0.4 + 0.06]} />
-            <meshStandardMaterial color="#000000" emissive="#ffffff" emissiveIntensity={0.12} transparent opacity={0.2} />
+            <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.2} transparent opacity={0.2} toneMapped={false} />
           </mesh>
         </group>
       )}
@@ -283,8 +285,8 @@ export function ProcessingModule({
             >
               <boxGeometry args={[scale[0] * 0.06, 1.0, scale[2] * 0.5]} />
               <meshStandardMaterial
-                color="#0c0c0c" roughness={0.3} metalness={0.7}
-                transparent opacity={0.6}
+                color="#111111" roughness={0.5} metalness={0.7}
+                transparent opacity={0.9}
               />
             </mesh>
           ))}
@@ -300,8 +302,8 @@ export function ProcessingModule({
         >
           <ringGeometry args={[scale[0] * 0.25, scale[0] * 0.32, 48]} />
           <meshStandardMaterial
-            color="#000000" emissive="#ffffff" emissiveIntensity={0}
-            transparent opacity={0} side={THREE.DoubleSide}
+            color="#ffffff" emissive="#ffffff" emissiveIntensity={0}
+            transparent opacity={0} side={THREE.DoubleSide} toneMapped={false}
           />
         </mesh>
       )}
@@ -315,10 +317,10 @@ export function ProcessingModule({
               position={[(i - 1) * scale[0] * 0.28, scale[1] * 0.5 + 0.15 + i * 0.04, 0]}
             >
               <boxGeometry args={[scale[0] * 0.22, 0.35, scale[2] * 0.6]} />
-              <meshStandardMaterial
-                color="#0a0a0a" roughness={0.3} metalness={0.6}
-                emissive="#ffffff" emissiveIntensity={0}
-                transparent opacity={0.05}
+              <meshPhysicalMaterial
+                color="#000000" metalness={0.9} roughness={0.1}
+                transmission={0.9} clearcoat={1.0} clearcoatRoughness={0.05}
+                transparent opacity={0.5}
               />
             </mesh>
           ))}
@@ -331,8 +333,8 @@ export function ProcessingModule({
           <mesh position={[0, scale[1] * 0.5 + 0.15, 0]}>
             <boxGeometry args={[scale[0] * 0.6, 0.25, scale[2] * 0.7]} />
             <meshStandardMaterial
-              color="#000000" emissive="#ffffff"
-              emissiveIntensity={0} roughness={0.2} metalness={0.5}
+              color="#ffffff" emissive="#ffffff"
+              emissiveIntensity={0} toneMapped={false}
               transparent opacity={0}
             />
           </mesh>

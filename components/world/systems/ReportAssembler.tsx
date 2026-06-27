@@ -43,14 +43,14 @@ export function ReportAssembler({ offset, active, progress }: ReportAssemblerPro
       {pages.map((page, i) => (
         <mesh key={i} position={[0, page.y, page.z]} visible={false}>
           <boxGeometry args={[1.4, 1.8, 0.02]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.7} />
+          <meshPhysicalMaterial color="#000000" metalness={0.8} roughness={0.1} transmission={0.9} clearcoat={1.0} clearcoatRoughness={0.05} transparent opacity={0.7} />
         </mesh>
       ))}
 
       {progress > 0.75 && (
         <mesh position={[2.5, 1.5 + (progress - 0.75) * 4, 0]} rotation={[0.2, -0.3, 0.1]}>
           <boxGeometry args={[1.2, 1.6, 0.02]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.9} />
+          <meshPhysicalMaterial color="#000000" metalness={0.8} roughness={0.1} transmission={0.9} clearcoat={1.0} clearcoatRoughness={0.05} transparent opacity={0.9} />
         </mesh>
       )}
     </group>

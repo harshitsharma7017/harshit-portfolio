@@ -107,22 +107,24 @@ export function ServerCore({ active, throughputMultiplier }: ServerCoreProps) {
           <mesh>
             <boxGeometry args={[TIER_WIDTH, TIER_HEIGHT, TIER_DEPTH]} />
             <meshStandardMaterial
-              color="#0c0c0c"
-              roughness={0.3}
-              metalness={0.8}
+              color="#080808"
+              roughness={0.98}
+              metalness={0.1}
               transparent
-              opacity={0.85}
+              opacity={0.92}
             />
           </mesh>
 
           {/* Wireframe cage overlay */}
           <mesh>
             <boxGeometry args={[TIER_WIDTH + 0.04, TIER_HEIGHT + 0.04, TIER_DEPTH + 0.04]} />
-            <meshBasicMaterial
-              color="#ffffff"
+            <meshStandardMaterial
+              color="#222222"
               wireframe
+              roughness={0.3}
+              metalness={0.9}
               transparent
-              opacity={0.06}
+              opacity={0.08}
             />
           </mesh>
 
@@ -130,11 +132,12 @@ export function ServerCore({ active, throughputMultiplier }: ServerCoreProps) {
           <mesh position={[0, TIER_HEIGHT * 0.5 + 0.005, 0]}>
             <boxGeometry args={[TIER_WIDTH + 0.02, 0.005, TIER_DEPTH + 0.02]} />
             <meshStandardMaterial
-              color="#000000"
+              color="#ffffff"
               emissive="#ffffff"
-              emissiveIntensity={0.15}
+              emissiveIntensity={1.5}
               transparent
               opacity={0.3}
+              toneMapped={false}
             />
           </mesh>
 
@@ -151,11 +154,12 @@ export function ServerCore({ active, throughputMultiplier }: ServerCoreProps) {
               >
                 <sphereGeometry args={[LED_RADIUS, 8, 8]} />
                 <meshStandardMaterial
-                  color="#000000"
+                  color="#ffffff"
                   emissive="#ffffff"
-                  emissiveIntensity={0.5}
+                  emissiveIntensity={1.8}
                   transparent
                   opacity={0.8}
+                  toneMapped={false}
                 />
               </mesh>
             );
@@ -165,11 +169,11 @@ export function ServerCore({ active, throughputMultiplier }: ServerCoreProps) {
           <mesh position={[0, 0, 0.01]}>
             <boxGeometry args={[TIER_WIDTH * 0.85, TIER_HEIGHT * 0.6, TIER_DEPTH * 0.9]} />
             <meshStandardMaterial
-              color="#080808"
-              roughness={0.5}
-              metalness={0.6}
+              color="#060606"
+              roughness={0.98}
+              metalness={0.1}
               transparent
-              opacity={0.6}
+              opacity={0.8}
             />
           </mesh>
         </group>
@@ -186,11 +190,13 @@ export function ServerCore({ active, throughputMultiplier }: ServerCoreProps) {
         >
           <cylinderGeometry args={[CONDUIT_RADIUS, CONDUIT_RADIUS, conduitHeight, 8]} />
           <meshStandardMaterial
-            color="#000000"
+            color="#111111"
+            roughness={0.3}
+            metalness={0.9}
             emissive="#ffffff"
             emissiveIntensity={0.5}
             transparent
-            opacity={0.6}
+            opacity={0.9}
           />
         </mesh>
       ))}
@@ -199,11 +205,11 @@ export function ServerCore({ active, throughputMultiplier }: ServerCoreProps) {
       <mesh position={[0, TIERS[TIERS.length - 1].y - 0.3, 0]}>
         <boxGeometry args={[TIER_WIDTH + 0.5, 0.05, TIER_DEPTH + 0.5]} />
         <meshStandardMaterial
-          color="#050505"
-          roughness={0.4}
-          metalness={0.9}
+          color="#0a0a0a"
+          roughness={0.7}
+          metalness={0.3}
           transparent
-          opacity={0.5}
+          opacity={0.9}
         />
       </mesh>
 
@@ -214,11 +220,11 @@ export function ServerCore({ active, throughputMultiplier }: ServerCoreProps) {
       >
         <planeGeometry args={[TIER_WIDTH * 1.5, TIER_DEPTH * 1.5]} />
         <meshStandardMaterial
-          color="#080808"
+          color="#111111"
           roughness={0.2}
-          metalness={1.0}
+          metalness={0.9}
           transparent
-          opacity={0.15}
+          opacity={0.5}
         />
       </mesh>
     </group>

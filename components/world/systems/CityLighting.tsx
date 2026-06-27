@@ -12,7 +12,7 @@ export function CityLighting({ active }: CityLightingProps) {
       {/* Primary key light - casts sharp architectural shadows */}
       <directionalLight
         position={[15, 20, 10]}
-        intensity={0.6}
+        intensity={0.9}
         color="#ffffff"
         castShadow
         shadow-mapSize={[2048, 2048]}
@@ -27,19 +27,19 @@ export function CityLighting({ active }: CityLightingProps) {
       {/* Fill light to soften harsh shadows on matte materials */}
       <directionalLight
         position={[-10, 5, -5]}
-        intensity={0.2}
+        intensity={0.3}
         color="#ffffff"
       />
 
       {/* Rim light from behind to catch building edges */}
       <directionalLight
         position={[0, 8, -20]}
-        intensity={0.3}
+        intensity={0.5}
         color="#ffffff"
       />
 
       {/* Subtle ambient base */}
-      <ambientLight intensity={0.1} color="#ffffff" />
+      <ambientLight intensity={0.15} color="#ffffff" />
     </group>
   );
 }

@@ -23,17 +23,22 @@ export class CameraDirector {
   ): void {
     this.time += delta;
 
-    const driftX = driftOffset(this.time, 1, driftAmplitude);
-    const driftY = driftOffset(this.time, 2, driftAmplitude * 0.5);
+    // Damped inertia (framerate independent, heavier feel)
+    const damping = 3.5;
+    const t = 1.0 - Math.exp(-damping * delta);
 
-    camera.position.lerp(
-      this.targetPosition.clone().add(new THREE.Vector3(driftX, driftY, 0)),
-      0.04
-    );
+    // Organic breathing (cinematographer feel - slow, compound waves)
+    const breathT = this.time * 0.6;
+    const driftX = driftOffset(breathT, 1, driftAmplitude) + Math.sin(breathT * 0.4) * (driftAmplitude * 0.3);
+    const driftY = driftOffset(breathT, 2, driftAmplitude * 0.8) + Math.cos(breathT * 0.3) * (driftAmplitude * 0.4);
 
-    this.currentLookAt.lerp(this.targetLookAt, 0.04);
+    const finalTargetPos = this.targetPosition.clone().add(new THREE.Vector3(driftX, driftY, 0));
+
+    camera.position.lerp(finalTargetPos, t);
+    this.currentLookAt.lerp(this.targetLookAt, t);
+    
     camera.lookAt(this.currentLookAt);
-    camera.fov = THREE.MathUtils.lerp(camera.fov, this.targetFov, 0.04);
+    camera.fov = THREE.MathUtils.lerp(camera.fov, this.targetFov, t);
     camera.updateProjectionMatrix();
   }
 }

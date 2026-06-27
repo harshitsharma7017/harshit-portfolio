@@ -46,13 +46,16 @@ export function InformationParticleField({
     return data;
   }, [count]);
 
-  const geometry = useMemo(() => new THREE.BoxGeometry(0.025, 0.025, 0.025), []);
+  const geometry = useMemo(() => new THREE.OctahedronGeometry(0.03, 0), []);
   const material = useMemo(
     () =>
-      new THREE.MeshBasicMaterial({
+      new THREE.MeshStandardMaterial({
         color: "#ffffff",
+        emissive: "#ffffff",
+        emissiveIntensity: 1.0,
         transparent: true,
-        opacity: 0.7,
+        opacity: 0.6,
+        toneMapped: false,
       }),
     []
   );
