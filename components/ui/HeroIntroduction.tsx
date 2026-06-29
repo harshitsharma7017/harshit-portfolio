@@ -1,7 +1,7 @@
 "use client";
 
 import { useExperienceContext } from "@/components/providers/ExperienceProvider";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
@@ -40,7 +40,7 @@ export function HeroIntroduction() {
     },
   };
 
-  const fadeUpVariant = {
+  const fadeUpVariant: Variants = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
   };
@@ -50,7 +50,7 @@ export function HeroIntroduction() {
     show: { opacity: 1, transition: { duration: 1 } },
   };
 
-  const portraitVariant = {
+  const portraitVariant: Variants = {
     hidden: { opacity: 0, x: 50 },
     show: { opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } },
   };
