@@ -41,8 +41,10 @@ export function ScrollTrack() {
       end: "bottom bottom",
       scrub: 0.8,
       onUpdate: (self) => {
+        console.log(`ScrollTrigger onUpdate: setting scroll progress to ${self.progress}`);
         setScrollProgress(self.progress);
         cameraDirector.setProgress(self.progress);
+        console.log(`CameraDirector progress set to ${self.progress}`);
       },
     });
 

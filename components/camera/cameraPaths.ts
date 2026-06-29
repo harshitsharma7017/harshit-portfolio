@@ -3,8 +3,9 @@ import { ZONES } from "@/data/zoneConfig";
 
 export const CAMERA_ANCHORS: Record<string, CameraAnchor> = {
   boot: {
-    position: [0, 2, 8],
-    lookAt: [0, 0, 0],
+    // Dedicated staging area in empty negative space far from Backend Engine
+    position: [0, 2, 60],
+    lookAt: [0, 0, 45],
     fov: 50,
   },
   backend: {

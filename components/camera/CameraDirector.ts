@@ -3,11 +3,19 @@ import { driftOffset } from "@/lib/math/noise";
 import { getCameraAnchorForProgress } from "./cameraPaths";
 
 export class CameraDirector {
-  private targetPosition = new THREE.Vector3(0, 2, 8);
-  private targetLookAt = new THREE.Vector3(0, 0, 0);
-  private currentLookAt = new THREE.Vector3(0, 0, 0);
-  private targetFov = 50;
+  private targetPosition: THREE.Vector3;
+  private targetLookAt: THREE.Vector3;
+  private currentLookAt: THREE.Vector3;
+  private targetFov: number;
   private time = 0;
+
+  constructor() {
+    const anchor = getCameraAnchorForProgress(0);
+    this.targetPosition = new THREE.Vector3(...anchor.position);
+    this.targetLookAt = new THREE.Vector3(...anchor.lookAt);
+    this.currentLookAt = new THREE.Vector3(...anchor.lookAt);
+    this.targetFov = anchor.fov;
+  }
 
   setProgress(progress: number): void {
     const anchor = getCameraAnchorForProgress(progress);

@@ -18,6 +18,7 @@ export interface ZoneConfig {
   zPosition: number;
   scrollStart: number;
   scrollEnd: number;
+  cameraProgress: number;
 }
 
 export interface BootLogLine {
@@ -53,6 +54,8 @@ export interface ExperienceState {
   throughputMultiplier: number;
   contactRevealed: boolean;
   reducedMotion: boolean;
+  currentSceneIndex: number;
+  isTransitioning: boolean;
 }
 
 export type ExperienceAction =
@@ -65,7 +68,9 @@ export type ExperienceAction =
   | { type: "SET_HOVER_NODE"; nodeId: string | null }
   | { type: "SET_THROUGHPUT"; multiplier: number }
   | { type: "SET_CONTACT_REVEALED"; revealed: boolean }
-  | { type: "SET_REDUCED_MOTION"; reduced: boolean };
+  | { type: "SET_REDUCED_MOTION"; reduced: boolean }
+  | { type: "SET_SCENE_INDEX"; index: number }
+  | { type: "SET_TRANSITIONING"; transitioning: boolean };
 
 export interface CameraAnchor {
   position: [number, number, number];

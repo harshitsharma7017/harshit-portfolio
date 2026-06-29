@@ -20,88 +20,76 @@ interface StoryContent {
 
 const STORY_DATA: StoryContent[] = [
   {
-    id: "intro",
-    title: "HARSHIT SHARMA",
-    subtitle: "Full Stack Engineer",
-    paragraphs: [
-      "I specialize in building backend systems that power production applications.",
-      "Over the past year I've designed APIs, optimized databases, automated business workflows, and built products used by real users."
-    ],
-    metadata: "Node.js • TypeScript • React • MongoDB • PostgreSQL",
-    position: "center",
-    animation: "fade",
-    start: 0.08,
-    end: 0.11,
-  },
-  {
     id: "backend",
     title: "02 / BACKEND DEVELOPMENT",
     paragraphs: [
-      "This is where I create the most value.",
-      "I design backend architectures that are secure, scalable, and maintainable—from authentication and validation to APIs, background jobs, and deployment.",
-      "Every visual element in this scene represents the invisible systems that keep modern applications running."
+      "I specialize in Node.js, Express, and Fastify backends using TypeScript.",
+      "I design REST APIs with schema-level request validation, structured error handling, and consistent response contracts.",
+      "My experience includes wiring up OAuth 2.0 and Firebase for secure authentication, and containerizing services with Docker and GitHub Actions CI/CD to automate deployments."
     ],
     metadata: "Node.js • Express • Fastify • JWT • OAuth • Docker",
     position: "bottom-left",
     animation: "slide",
-    start: 0.15,
-    end: 0.20,
+    start: 0.11,
+    end: 0.16,
   },
   {
     id: "database",
     title: "03 / DATA INFRASTRUCTURE",
     paragraphs: [
-      "Good software depends on good data.",
-      "I design schemas, optimize aggregation pipelines, improve query performance, and build validation layers that keep production systems reliable under load."
+      "Good software depends on reliable data infrastructure.",
+      "I have hands-on experience cutting response times on high-traffic endpoints by restructuring slow MongoDB and PostgreSQL aggregation pipelines.",
+      "By adding targeted indexes and designing robust data ingestion pipelines, I ensure consistent integrity checks across multiple data sources."
     ],
     metadata: "MongoDB • PostgreSQL • Indexing • Performance Optimization",
     position: "bottom-left",
     animation: "fade-up",
-    start: 0.29,
-    end: 0.35,
+    start: 0.25,
+    end: 0.31,
   },
   {
     id: "eqas",
     title: "04 / EQASONLINE",
-    subtitle: "Current Role",
+    subtitle: "Current Role: Full Stack Developer",
     paragraphs: [
-      "As a Full Stack Developer, I own the backend of a laboratory proficiency testing platform used across multiple institutions.",
-      "I built automated report generation, data validation pipelines, production APIs, and statistical processing workflows that replaced manual operations."
+      "I own the end-to-end backend for a laboratory proficiency testing platform used across multiple institutions.",
+      "I designed the data model, API structure, and validation logic from the ground up to ensure robust operations.",
+      "I also shipped a Handlebars-based report generation module that auto-produces formatted documents, eliminating previously manual reporting processes."
     ],
     metadata: "Production Platform • Automated Reports • Data Validation • Statistics Engine",
     position: "bottom-right",
     animation: "stagger",
-    start: 0.45,
-    end: 0.51,
+    start: 0.41,
+    end: 0.47,
   },
   {
     id: "citycore",
     title: "05 / CITYCORE",
     subtitle: "Founder & Full Stack Developer",
     paragraphs: [
-      "CityCore is my largest engineering project.",
-      "I designed the architecture, developed the complete platform, and deployed it independently.",
-      "Today it connects shops, hospitals, drivers, restaurants, and local services through one modular backend serving 500+ users."
+      "CityCore is a Hyperlocal City Services Platform I built and shipped as the sole developer, currently serving 500+ users.",
+      "The Node.js backend API runs under real daily load, handling multi-service traffic with zero-downtime releases via Vercel's edge network.",
+      "I architected a modular, service-based backend allowing independent deployability for new service categories, and implemented JWT authentication with role-based access control (RBAC)."
     ],
     metadata: "Production Platform • Modular Architecture • 500+ Users • RBAC • JWT",
-    position: "bottom-left",
+    position: "bottom-right",
     animation: "stagger",
-    start: 0.61,
-    end: 0.67,
+    start: 0.57,
+    end: 0.63,
   },
   {
     id: "projects",
     title: "06 / ENGINEERING PROJECTS",
     paragraphs: [
-      "Beyond my professional work, I enjoy building products that solve practical problems.",
-      { heading: "Task Manager", body: "Multi-user task management with JWT authentication, role-based access control, and real-time collaboration." },
-      { heading: "AutoFunds", body: "An AI-powered finance assistant that converts natural language into structured financial insights using GPT." }
+      "Beyond my professional work, I build products that solve practical problems.",
+      { heading: "Task Management System", body: "Full-stack tracking app with JWT authentication and RBAC. I designed the schema-level data model to handle multi-user task ownership, keeping authorization logic clean and separate." },
+      { heading: "AutoFunds", body: "An AI finance app using GPT-4 to parse plain-English expenses into categorized budgets. I engineered the server-side parsing logic to reliably extract structured data with robust fallback handling." }
     ],
     metadata: "OpenAI • Docker • GitHub Actions",
     position: "bottom-right",
     animation: "stagger",
-    start: 0.77,
-    end: 0.83,
+    start: 0.73,
+    end: 0.79,
   },
   {
     id: "contact",
@@ -112,10 +100,10 @@ const STORY_DATA: StoryContent[] = [
       "If you're looking for a backend-focused full stack engineer who enjoys building products from the ground up, I'd love to talk."
     ],
     subtitle: "Harshit Sharma — Full Stack Engineer",
-    metadata: "harshit.sharma8532@gmail.com • 7017855982",
+    metadata: "harshit.sharma8532@gmail.com • 7017855982 • github.com/harshitsharma7017 • linkedin.com/in/harshit-sharma-462a762b5",
     position: "center",
     animation: "terminal",
-    start: 0.92,
+    start: 0.88,
     end: 1.00,
   }
 ];

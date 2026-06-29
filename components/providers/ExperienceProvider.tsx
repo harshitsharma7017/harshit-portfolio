@@ -19,7 +19,7 @@ import { ZONES, getActiveZone, getZoneState } from "@/data/zoneConfig";
 
 const initialZoneStates = ZONES.reduce(
   (acc, zone) => {
-    acc[zone.id] = "dormant";
+    acc[zone.id] = getZoneState(zone, 0);
     return acc;
   },
   {} as Record<ZoneId, ZoneState>
@@ -36,6 +36,8 @@ const initialState: ExperienceState = {
   throughputMultiplier: 1,
   contactRevealed: false,
   reducedMotion: false,
+  currentSceneIndex: 0,
+  isTransitioning: false,
 };
 
 function experienceReducer(
@@ -80,6 +82,10 @@ function experienceReducer(
       return { ...state, contactRevealed: action.revealed };
     case "SET_REDUCED_MOTION":
       return { ...state, reducedMotion: action.reduced };
+    case "SET_SCENE_INDEX":
+      return { ...state, currentSceneIndex: action.index };
+    case "SET_TRANSITIONING":
+      return { ...state, isTransitioning: action.transitioning };
     default:
       return state;
   }
@@ -95,6 +101,8 @@ interface ExperienceContextValue {
   setThroughput: (multiplier: number) => void;
   setContactRevealed: (revealed: boolean) => void;
   setReducedMotion: (reduced: boolean) => void;
+  setSceneIndex: (index: number) => void;
+  setTransitioning: (transitioning: boolean) => void;
 }
 
 const ExperienceContext = createContext<ExperienceContextValue | null>(null);
@@ -103,6 +111,7 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(experienceReducer, initialState);
 
   const setScrollProgress = useCallback((progress: number) => {
+    console.log(`Context: setScrollProgress(${progress})`);
     dispatch({ type: "SET_SCROLL_PROGRESS", progress });
   }, []);
 
@@ -134,6 +143,16 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "SET_REDUCED_MOTION", reduced });
   }, []);
 
+  const setSceneIndex = useCallback((index: number) => {
+    console.log(`Context: setSceneIndex(${index})`);
+    dispatch({ type: "SET_SCENE_INDEX", index });
+  }, []);
+
+  const setTransitioning = useCallback((transitioning: boolean) => {
+    console.log(`Context: setTransitioning(${transitioning})`);
+    dispatch({ type: "SET_TRANSITIONING", transitioning });
+  }, []);
+
   const value = useMemo(
     () => ({
       state,
@@ -145,6 +164,8 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
       setThroughput,
       setContactRevealed,
       setReducedMotion,
+      setSceneIndex,
+      setTransitioning,
     }),
     [
       state,
@@ -156,6 +177,8 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
       setThroughput,
       setContactRevealed,
       setReducedMotion,
+      setSceneIndex,
+      setTransitioning,
     ]
   );
 

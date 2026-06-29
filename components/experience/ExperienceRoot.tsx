@@ -3,12 +3,14 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { ScrollTrack } from "./ScrollTrack";
+import { SceneNavigationController } from "./SceneNavigationController";
 import { BootTerminal } from "@/components/ui/BootTerminal";
 import { ZoneCaption } from "@/components/ui/ZoneCaption";
 import { ScrollHint } from "@/components/ui/ScrollHint";
 import { ProjectTerminal } from "@/components/ui/ProjectTerminal";
 import { ContactTerminal } from "@/components/ui/ContactTerminal";
 import { StoryOverlay } from "@/components/ui/StoryOverlay";
+import { HeroIntroduction } from "@/components/ui/HeroIntroduction";
 import { MobileExperience } from "@/components/ui/MobileExperience";
 import { useIsMobile, useReducedMotion } from "@/components/hooks/useExperienceState";
 
@@ -34,6 +36,7 @@ export function ExperienceRoot() {
       </div>
 
       <div className="ui-layer">
+        <HeroIntroduction />
         <StoryOverlay />
         <BootTerminal />
         <ZoneCaption />
@@ -43,6 +46,7 @@ export function ExperienceRoot() {
       </div>
 
       <ScrollTrack />
+      <SceneNavigationController />
     </div>
   );
 }
