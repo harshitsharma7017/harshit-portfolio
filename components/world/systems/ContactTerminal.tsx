@@ -96,7 +96,7 @@ export function ContactTerminal({ active }: ContactTerminalProps) {
 
 
   return (
-    <group position={[0, 0, 0]}>
+    <group position={[0, 0, 0]} visible={active}>
       {/* Monumental glass terminal screen */}
       <mesh position={[0, 0, -0.05]}>
         <planeGeometry args={[10, 6]} />

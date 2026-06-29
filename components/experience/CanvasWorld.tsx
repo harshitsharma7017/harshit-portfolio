@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
 import { World } from "@/components/world/World";
@@ -13,7 +14,7 @@ export function CanvasWorld() {
       dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: false, toneMapping: THREE.CineonToneMapping, toneMappingExposure: 1.1 }}
     >
-      <fog attach="fog" args={["#0a0a0a", 5, 40]} />
+      <fog attach="fog" args={["#0a0a0a", 5, 150]} />
       <CameraRig />
       <World />
     </Canvas>

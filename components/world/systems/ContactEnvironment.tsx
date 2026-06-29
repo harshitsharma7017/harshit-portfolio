@@ -68,7 +68,7 @@ export function ContactEnvironment({ active }: ContactEnvironmentProps) {
 
 
   return (
-    <group>
+    <group visible={active}>
       {/* Intense, dramatic rim light from behind to frame the terminal */}
       <spotLight
         position={[0, 5, -8]}

@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useExperienceContext } from "@/components/providers/ExperienceProvider";
 import { getZoneById } from "@/data/zoneConfig";
 import { ContactTerminal } from "@/components/world/systems/ContactTerminal";
