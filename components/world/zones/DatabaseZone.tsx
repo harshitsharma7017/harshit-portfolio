@@ -7,6 +7,7 @@ import { DatabaseQueryFlow, type CollectionTarget } from "@/components/world/sys
 import { DatabaseLighting } from "@/components/world/systems/DatabaseLighting";
 import { useExperienceContext } from "@/components/providers/ExperienceProvider";
 import { getZoneById } from "@/data/zoneConfig";
+import { useIsMobile } from "@/components/hooks/useIsMobile";
 
 // --- Collection Topology ---
 // Dramatic scale differences. Positions spread across a wide volume with depth.
@@ -94,6 +95,8 @@ export function DatabaseZone() {
   const { state } = useExperienceContext();
   const zone = getZoneById("database");
   const active = state.zoneStates.database !== "dormant";
+  const isMobile = useIsMobile();
+  const scale = isMobile ? 0.7 : 1;
 
   // Shared index ring trigger registry
   const indexRingTriggers = useRef<Map<string, () => void>>(new Map());
@@ -106,7 +109,7 @@ export function DatabaseZone() {
   );
 
   return (
-    <group position={[0, 0, zone.zPosition]}>
+    <group position={[0, 0, zone.zPosition]} scale={[scale, scale, scale]}>
       <DatabaseLighting active={active} />
 
       {/* Collection Clusters */}

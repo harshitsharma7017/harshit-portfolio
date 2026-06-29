@@ -13,15 +13,25 @@ export function useHoverThroughput(active: boolean) {
       return;
     }
 
-    const handleMove = (event: MouseEvent) => {
-      const normalizedX = event.clientX / window.innerWidth;
+    const handleMove = (clientX: number) => {
+      const normalizedX = clientX / window.innerWidth;
       const multiplier = mapRange(normalizedX, 0, 1, 0.4, 2.2);
       setThroughput(multiplier);
     };
 
-    window.addEventListener("mousemove", handleMove);
+    const onMouseMove = (event: MouseEvent) => handleMove(event.clientX);
+    const onTouchMove = (event: TouchEvent) => {
+      if (event.touches.length > 0) {
+        handleMove(event.touches[0].clientX);
+      }
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    
     return () => {
-      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchmove", onTouchMove);
       setThroughput(1);
     };
   }, [active, setThroughput]);

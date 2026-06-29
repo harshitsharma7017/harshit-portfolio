@@ -105,6 +105,11 @@ export function SceneNavigationController() {
     };
 
     const handleTouchMove = (e: TouchEvent) => {
+      // Prevent native pull-to-refresh and overscroll
+      if (e.cancelable) {
+        e.preventDefault();
+      }
+
       if (stateRef.current.isTransitioning) return;
       
       const currentY = e.touches[0].clientY;

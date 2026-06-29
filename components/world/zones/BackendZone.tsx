@@ -6,6 +6,7 @@ import { BackendLighting } from "@/components/world/systems/BackendLighting";
 import { useExperienceContext } from "@/components/providers/ExperienceProvider";
 import { useHoverThroughput } from "@/components/hooks/useHoverThroughput";
 import { getZoneById } from "@/data/zoneConfig";
+import { useIsMobile } from "@/components/hooks/useExperienceState";
 
 export function BackendZone() {
   const { state } = useExperienceContext();
@@ -14,9 +15,11 @@ export function BackendZone() {
   const isActive = state.zoneStates.backend === "active";
 
   useHoverThroughput(isActive);
+  const isMobile = useIsMobile();
+  const scale = isMobile ? 0.75 : 1;
 
   return (
-    <group position={[0, 0, zone.zPosition]}>
+    <group position={[0, 0, zone.zPosition]} scale={[scale, scale, scale]}>
       <BackendLighting active={active} />
       <ServerCore
         active={active}

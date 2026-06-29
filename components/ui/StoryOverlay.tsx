@@ -130,14 +130,13 @@ export function StoryOverlay() {
 }
 
 function StoryBlock({ story }: { story: StoryContent }) {
-  // Positioning classes
   let positionClasses = "absolute ";
   if (story.position === "center") {
     positionClasses += "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center items-center";
   } else if (story.position === "bottom-left") {
-    positionClasses += "bottom-24 left-12 md:left-24 text-left items-start";
+    positionClasses += "bottom-[env(safe-area-inset-bottom,2rem)] md:bottom-24 left-6 right-6 md:left-24 md:right-auto text-left items-start";
   } else if (story.position === "bottom-right") {
-    positionClasses += "bottom-24 right-12 md:right-24 text-right items-end";
+    positionClasses += "bottom-[env(safe-area-inset-bottom,2rem)] md:bottom-24 left-6 right-6 md:left-auto md:right-24 text-right items-end";
   }
 
   // Animation variants
@@ -179,32 +178,32 @@ function StoryBlock({ story }: { story: StoryContent }) {
 
   const renderContent = () => (
     <>
-      <div className="text-xs tracking-[0.2em] text-white/40 uppercase mb-2">
+      <div className="text-[10px] md:text-xs tracking-[0.2em] text-white/40 uppercase mb-1 md:mb-2">
         {story.title}
       </div>
       
       {story.subtitle && (
-        <div className="text-sm md:text-base font-semibold text-white/60 uppercase tracking-wide mb-2">
+        <div className="text-xs md:text-base font-semibold text-white/60 uppercase tracking-wide mb-1 md:mb-2">
           {story.subtitle}
         </div>
       )}
 
-      <div className="flex flex-col gap-4 text-xl md:text-2xl font-medium text-white/90 leading-tight">
+      <div className="flex flex-col gap-2 md:gap-4 text-base md:text-2xl font-medium text-white/90 leading-tight">
         {story.paragraphs?.map((p, idx) => (
           <div key={idx}>
             {typeof p === 'string' ? (
               <span className="whitespace-pre-line">{p}</span>
             ) : (
-              <div className="flex flex-col gap-1 mt-2">
-                <span className="text-base font-bold text-white">{p.heading}</span>
-                <span className="text-lg md:text-xl text-white/80">{p.body}</span>
+              <div className="flex flex-col gap-1 mt-1 md:mt-2">
+                <span className="text-sm md:text-base font-bold text-white">{p.heading}</span>
+                <span className="text-base md:text-xl text-white/80">{p.body}</span>
               </div>
             )}
           </div>
         ))}
       </div>
 
-      <div className="text-[10px] md:text-xs font-mono text-white/40 mt-4">
+      <div className="text-[8px] md:text-xs font-mono text-white/40 mt-2 md:mt-4">
         {story.metadata}
       </div>
       
@@ -212,7 +211,7 @@ function StoryBlock({ story }: { story: StoryContent }) {
         <motion.span 
           animate={{ opacity: [0, 1, 0] }}
           transition={{ repeat: Infinity, duration: 1 }}
-          className="inline-block w-4 h-6 bg-white/70 mt-4 self-center"
+          className="inline-block w-4 h-6 bg-white/70 mt-2 md:mt-4 self-center"
         />
       )}
     </>
@@ -220,7 +219,7 @@ function StoryBlock({ story }: { story: StoryContent }) {
 
   return (
     <motion.div
-      className={`${positionClasses} flex flex-col gap-1 max-w-xl w-full bg-black/20 p-6 rounded-lg backdrop-blur-sm`}
+      className={`${positionClasses} flex flex-col gap-1 max-w-xl md:w-full bg-black/20 p-4 md:p-6 rounded-lg backdrop-blur-sm`}
       variants={variants[story.animation]}
       initial="initial"
       animate="animate"
@@ -228,29 +227,29 @@ function StoryBlock({ story }: { story: StoryContent }) {
     >
       {story.animation === "stagger" ? (
         <>
-          <motion.div variants={childVariants.stagger} className="text-xs tracking-[0.2em] text-white/40 uppercase mb-2">
+          <motion.div variants={childVariants.stagger} className="text-[10px] md:text-xs tracking-[0.2em] text-white/40 uppercase mb-1 md:mb-2">
             {story.title}
           </motion.div>
           {story.subtitle && (
-            <motion.div variants={childVariants.stagger} className="text-sm md:text-base font-semibold text-white/60 uppercase tracking-wide mb-2">
+            <motion.div variants={childVariants.stagger} className="text-xs md:text-base font-semibold text-white/60 uppercase tracking-wide mb-1 md:mb-2">
               {story.subtitle}
             </motion.div>
           )}
-          <div className="flex flex-col gap-4 text-xl md:text-2xl font-medium text-white/90 leading-tight">
+          <div className="flex flex-col gap-2 md:gap-4 text-base md:text-2xl font-medium text-white/90 leading-tight">
             {story.paragraphs?.map((p, idx) => (
               <motion.div key={idx} variants={childVariants.stagger}>
                 {typeof p === 'string' ? (
                   <span className="whitespace-pre-line">{p}</span>
                 ) : (
-                  <div className="flex flex-col gap-1 mt-2">
-                    <span className="text-base font-bold text-white">{p.heading}</span>
-                    <span className="text-lg md:text-xl text-white/80">{p.body}</span>
+                  <div className="flex flex-col gap-1 mt-1 md:mt-2">
+                    <span className="text-sm md:text-base font-bold text-white">{p.heading}</span>
+                    <span className="text-base md:text-xl text-white/80">{p.body}</span>
                   </div>
                 )}
               </motion.div>
             ))}
           </div>
-          <motion.div variants={childVariants.stagger} className="text-[10px] md:text-xs font-mono text-white/40 mt-4">
+          <motion.div variants={childVariants.stagger} className="text-[8px] md:text-xs font-mono text-white/40 mt-2 md:mt-4">
             {story.metadata}
           </motion.div>
         </>

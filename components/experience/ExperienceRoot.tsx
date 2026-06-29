@@ -23,7 +23,7 @@ export function ExperienceRoot() {
   const isMobile = useIsMobile();
   const reducedMotion = useReducedMotion();
 
-  if (isMobile || reducedMotion) {
+  if (reducedMotion) {
     return <MobileExperience />;
   }
 

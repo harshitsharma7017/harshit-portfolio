@@ -9,8 +9,12 @@ export class CameraDirector {
   private targetFov: number;
   private time = 0;
 
+  private isMobile(): boolean {
+    return typeof window !== "undefined" && window.innerWidth < 768;
+  }
+
   constructor() {
-    const anchor = getCameraAnchorForProgress(0);
+    const anchor = getCameraAnchorForProgress(0, this.isMobile());
     this.targetPosition = new THREE.Vector3(...anchor.position);
     this.targetLookAt = new THREE.Vector3(...anchor.lookAt);
     this.currentLookAt = new THREE.Vector3(...anchor.lookAt);
@@ -18,7 +22,7 @@ export class CameraDirector {
   }
 
   setProgress(progress: number): void {
-    const anchor = getCameraAnchorForProgress(progress);
+    const anchor = getCameraAnchorForProgress(progress, this.isMobile());
     this.targetPosition.set(...anchor.position);
     this.targetLookAt.set(...anchor.lookAt);
     this.targetFov = anchor.fov;

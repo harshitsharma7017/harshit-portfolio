@@ -46,7 +46,52 @@ export const CAMERA_ANCHORS: Record<string, CameraAnchor> = {
   },
 };
 
-export function getCameraAnchorForProgress(progress: number): CameraAnchor {
+export const MOBILE_CAMERA_ANCHORS: Record<string, CameraAnchor> = {
+  boot: {
+    // Closer, wider FOV
+    position: [0, 2, 58],
+    lookAt: [0, 0, 45],
+    fov: 65,
+  },
+  backend: {
+    // Tighter, lower angle to fit height without backing up
+    position: [0, 4, -12],
+    lookAt: [0, -2, -20],
+    fov: 60,
+  },
+  database: {
+    // Closer, low angle
+    position: [0, -4, -32],
+    lookAt: [0, 2, -40],
+    fov: 65,
+  },
+  eqas: {
+    // Closer, looking slightly down
+    position: [0, 3, -48],
+    lookAt: [0, -1, -55],
+    fov: 65,
+  },
+  citycore: {
+    // Instead of pulling back to -50, get closer but look down harder
+    position: [0, 10, -62],
+    lookAt: [0, -6, -70],
+    fov: 70,
+  },
+  projects: {
+    // Closer
+    position: [0, 2, -82],
+    lookAt: [0, 0, -90],
+    fov: 65,
+  },
+  contact: {
+    // Monumental but closer
+    position: [0, 2, -102],
+    lookAt: [0, 1.5, -110],
+    fov: 60,
+  },
+};
+
+export function getCameraAnchorForProgress(progress: number, isMobile: boolean = false): CameraAnchor {
   const clamped = Math.min(1, Math.max(0, progress));
 
   let fromIndex = 0;
@@ -59,8 +104,10 @@ export function getCameraAnchorForProgress(progress: number): CameraAnchor {
 
   const fromZone = ZONES[fromIndex];
   const toZone = ZONES[Math.min(fromIndex + 1, ZONES.length - 1)];
-  const fromAnchor = CAMERA_ANCHORS[fromZone.id];
-  const toAnchor = CAMERA_ANCHORS[toZone.id];
+  
+  const anchors = isMobile ? MOBILE_CAMERA_ANCHORS : CAMERA_ANCHORS;
+  const fromAnchor = anchors[fromZone.id];
+  const toAnchor = anchors[toZone.id];
 
   const range = toZone.scrollStart - fromZone.scrollStart || 1;
   const localT = Math.min(
@@ -75,13 +122,15 @@ export function getCameraAnchorForProgress(progress: number): CameraAnchor {
 
   // Spatial arc: sweep outward dynamically during transit to feel like travelling
   const arcHeight = Math.sin(t * Math.PI) * 2.5; 
+  // Limit arc on mobile to prevent going out of bounds
+  const arcScale = isMobile ? 0.3 : 1.0;
   const arcDirectionX = (fromIndex % 2 === 0) ? 1 : -1;
   const arcDirectionY = (fromIndex % 3 === 0) ? 1 : -1;
 
   return {
     position: [
-      fromAnchor.position[0] + (toAnchor.position[0] - fromAnchor.position[0]) * t + (arcHeight * arcDirectionX),
-      fromAnchor.position[1] + (toAnchor.position[1] - fromAnchor.position[1]) * t + (arcHeight * arcDirectionY * 0.5),
+      fromAnchor.position[0] + (toAnchor.position[0] - fromAnchor.position[0]) * t + (arcHeight * arcDirectionX * arcScale),
+      fromAnchor.position[1] + (toAnchor.position[1] - fromAnchor.position[1]) * t + (arcHeight * arcDirectionY * 0.5 * arcScale),
       fromAnchor.position[2] + (toAnchor.position[2] - fromAnchor.position[2]) * t,
     ],
     lookAt: [

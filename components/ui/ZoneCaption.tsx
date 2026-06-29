@@ -9,7 +9,7 @@ export function ZoneCaption() {
   if (!zone || zone.id === "boot") return null;
 
   return (
-    <div className="fixed top-24 left-8 md:left-16 z-20 pointer-events-none">
+    <div className="fixed top-[env(safe-area-inset-top,6rem)] pt-6 md:pt-0 md:top-24 left-6 md:left-16 z-20 pointer-events-none">
       <p className="text-[11px] uppercase tracking-[6px] text-[#444444] mb-3">
         {zone.label}
       </p>
