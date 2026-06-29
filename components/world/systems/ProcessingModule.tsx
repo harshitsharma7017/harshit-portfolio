@@ -57,23 +57,33 @@ export function ProcessingModule({
     timeRef.current += delta;
     const t = timeRef.current;
 
-    // LED pulse
+    // LED pulse: Stepped, binary processing blink
     ledRefs.current.forEach((led, idx) => {
       if (!led) return;
       const mat = led.material as THREE.MeshStandardMaterial;
-      const pulse = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(t * 1.5 + idx * 2.1));
-      mat.emissiveIntensity = pulse;
+      const step = Math.floor((t * 6.0) + (idx * 2.0)) % 7; // Rapid binary pattern
+      mat.emissiveIntensity = (step === 0 || step === 2) ? 1.5 : 0.1;
     });
 
     // --- Module-specific animations ---
 
-    // STATISTICS: oscillating bars
+    // STATISTICS: Stepped, mechanical jumps instead of sine waves
     if (moduleType === "statistics" && statBarsRef.current) {
       statBarsRef.current.children.forEach((child, i) => {
         const mesh = child as THREE.Mesh;
         const baseHeight = 0.3 + (i % 3) * 0.2;
-        const targetH = baseHeight + Math.sin(t * 0.8 + i * 1.3) * 0.15;
-        mesh.scale.y = THREE.MathUtils.lerp(mesh.scale.y, Math.max(0.05, targetH), 0.06);
+        
+        // Target changes abruptly
+        const stepTime = Math.floor(t * 2.0 + i * 0.5);
+        // Deterministic pseudo-random height based on stepTime
+        const pseudoRand = Math.abs((Math.sin(stepTime * 12.9898 + i * 78.233) * 43758.5453) % 1);
+        const targetH = baseHeight + pseudoRand * 0.4;
+        
+        // Mechanical, heavy exponential decay (framerate independent)
+        const damping = 12.0;
+        const lerpT = 1.0 - Math.exp(-damping * delta);
+        
+        mesh.scale.y = THREE.MathUtils.lerp(mesh.scale.y, Math.max(0.05, targetH), lerpT);
         mesh.position.y = (mesh.scale.y * 1.0) / 2 + scale[1] * 0.5;
       });
     }

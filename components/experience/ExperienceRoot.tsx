@@ -8,6 +8,7 @@ import { ZoneCaption } from "@/components/ui/ZoneCaption";
 import { ScrollHint } from "@/components/ui/ScrollHint";
 import { ProjectTerminal } from "@/components/ui/ProjectTerminal";
 import { ContactTerminal } from "@/components/ui/ContactTerminal";
+import { StoryOverlay } from "@/components/ui/StoryOverlay";
 import { MobileExperience } from "@/components/ui/MobileExperience";
 import { useIsMobile, useReducedMotion } from "@/components/hooks/useExperienceState";
 
@@ -33,6 +34,7 @@ export function ExperienceRoot() {
       </div>
 
       <div className="ui-layer">
+        <StoryOverlay />
         <BootTerminal />
         <ZoneCaption />
         <ScrollHint />

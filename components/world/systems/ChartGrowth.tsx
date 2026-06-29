@@ -15,12 +15,17 @@ const BAR_HEIGHTS = [1.2, 0.8, 1.6, 0.5, 1.0, 1.4];
 export function ChartGrowth({ offset, active, progress }: ChartGrowthProps) {
   const groupRef = useRef<THREE.Group>(null);
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     if (!groupRef.current || !active) return;
     groupRef.current.children.forEach((child, i) => {
       const mesh = child as THREE.Mesh;
       const targetHeight = BAR_HEIGHTS[i] * Math.min(1, Math.max(0, (progress - 0.3) * 1.5));
-      mesh.scale.y = THREE.MathUtils.lerp(mesh.scale.y, targetHeight, 0.05);
+      
+      // Mechanical, framerate-independent decay rather than rubbery lerp
+      const damping = 10.0;
+      const lerpT = 1.0 - Math.exp(-damping * delta);
+      
+      mesh.scale.y = THREE.MathUtils.lerp(mesh.scale.y, targetHeight, lerpT);
       mesh.position.y = (mesh.scale.y * BAR_HEIGHTS[i]) / 2;
     });
   });

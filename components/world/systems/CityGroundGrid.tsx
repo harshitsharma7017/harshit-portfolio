@@ -12,9 +12,9 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
   const meshRef = useRef<THREE.InstancedMesh>(null);
 
   // Procedural city grid setup
-  const gridSize = 24; // 24x24 grid
+  const gridSize = 40; // 40x40 grid for massive scale
   const cellSize = 1.2;
-  const gap = 0.3;
+  const gap = 0.4;
   const totalCell = cellSize + gap;
 
   // We want to avoid placing background blocks where landmark nodes exist
@@ -33,7 +33,7 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
         // Check distance to landmarks to leave space
         let tooClose = false;
         for (const lp of landmarkPositions) {
-          if (Math.hypot(posX - lp.x, posZ - lp.y) < 1.5) {
+          if (Math.hypot(posX - lp.x, posZ - lp.y) < 3.0) { // Large negative space around districts
             tooClose = true;
             break;
           }
@@ -41,9 +41,23 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
 
         if (!tooClose) {
           // Randomize block heights to create urban landscape feel
-          // Taller in center, shorter at edges
+          // Taller in clusters to form a distinct skyline
           const distFromCenter = Math.hypot(posX, posZ);
-          const maxH = Math.max(0.2, 2.5 - distFromCenter * 0.15);
+          
+          let maxH = 0.2;
+          if (distFromCenter > 5 && distFromCenter < 12) {
+            // Mid-range skyline
+            maxH = 2.0 + Math.random() * 2.0;
+          } else if (distFromCenter >= 12 && distFromCenter < 25) {
+            // Distant towering silhouettes
+            maxH = 1.0 + Math.random() * 4.0;
+            // Occasional massive towers
+            if (Math.random() > 0.95) maxH += 3.0; 
+          } else {
+            // Outskirts
+            maxH = Math.max(0.1, 1.0 - (distFromCenter - 25) * 0.1);
+          }
+
           const h = 0.1 + Math.random() * maxH;
           blocks.push({
             position: [posX, h / 2, posZ],
@@ -73,7 +87,7 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
     <group>
       {/* Base plane acting as the recessed road network */}
       <mesh position={[0, -0.05, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <planeGeometry args={[40, 40]} />
+        <planeGeometry args={[70, 70]} />
         <meshStandardMaterial
           color="#060606"
           roughness={0.98}

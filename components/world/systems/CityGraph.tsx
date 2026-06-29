@@ -41,8 +41,18 @@ export function CityGraph({ offset, active }: CityGraphProps) {
   useFrame((_, delta) => {
     if (!routesRef.current || !active) return;
     timeRef.current += delta;
+    
+    // Animate lines to show directional propagation
     routesRef.current.children.forEach((child, i) => {
       child.position.y = Math.sin(timeRef.current * 2 + i) * 0.05;
+      
+      // @react-three/drei Line returns a Group or Mesh. 
+      // Safely traverse to find the LineMaterial and animate dashOffset
+      child.traverse((obj: any) => {
+        if (obj.material && obj.material.dashed !== undefined) {
+          obj.material.dashOffset -= delta * 1.5;
+        }
+      });
     });
   });
 
@@ -82,7 +92,10 @@ export function CityGraph({ offset, active }: CityGraphProps) {
                 color="#ffffff"
                 transparent
                 opacity={isActive ? 0.9 : 0.12}
-                lineWidth={1}
+                lineWidth={isActive ? 2 : 1}
+                dashed
+                dashScale={10}
+                dashSize={isActive ? 2 : 1}
               />
             );
           })

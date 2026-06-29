@@ -18,21 +18,24 @@ interface AutonomousPacket {
   start: THREE.Vector3;
   mid: THREE.Vector3; // Taxicab corner
   end: THREE.Vector3;
+  waitingForDispatch: boolean;
+  originNodeId: string;
 }
 
 export function CityLogisticsFlow({ active }: CityLogisticsFlowProps) {
   const { state } = useExperienceContext();
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const packets = useRef<AutonomousPacket[]>([]);
+  const timeRef = useRef(0);
 
-  // Prepare geometry and materials for autonomous traffic
-  const geometry = useMemo(() => new THREE.BoxGeometry(0.15, 0.15, 0.3), []);
+  // Prepare geometry and materials for autonomous traffic (High-speed data pulses)
+  const geometry = useMemo(() => new THREE.BoxGeometry(0.04, 0.04, 0.6), []);
   const material = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
         color: "#ffffff",
         emissive: "#ffffff",
-        emissiveIntensity: 1.0,
+        emissiveIntensity: 3.0,
         transparent: true,
         opacity: 0.9,
         toneMapped: false,
@@ -63,10 +66,12 @@ export function CityLogisticsFlow({ active }: CityLogisticsFlowProps) {
 
       pool.push({
         progress: Math.random(),
-        speed: 0.2 + Math.random() * 0.3,
+        speed: 0.6 + Math.random() * 0.8, // Faster pulses
         start,
         mid,
         end,
+        waitingForDispatch: false,
+        originNodeId: n1.id,
       });
     }
     packets.current = pool;
@@ -74,6 +79,7 @@ export function CityLogisticsFlow({ active }: CityLogisticsFlowProps) {
 
   useFrame((_, delta) => {
     if (!meshRef.current || !active) return;
+    timeRef.current += delta;
 
     const hoveredId = state.hoverNodeId;
     // Fade out autonomous traffic when hovered
@@ -85,7 +91,21 @@ export function CityLogisticsFlow({ active }: CityLogisticsFlowProps) {
     const dummy = new THREE.Object3D();
 
     packets.current.forEach((pkt, i) => {
-      pkt.progress += pkt.speed * delta;
+      if (pkt.waitingForDispatch) {
+        const originNode = CITY_NODES.find((n) => n.id === pkt.originNodeId);
+        if (originNode) {
+          const spatialPhase = (originNode.position[0] + originNode.position[2]) * 0.4;
+          // Use the exact same formula from CityArchitecture to sync the breathing burst
+          const isActiveCycle = Math.sin(timeRef.current * 1.5 + spatialPhase) > 0.6;
+          if (isActiveCycle) {
+            pkt.waitingForDispatch = false; // Dispatch!
+          }
+        }
+      }
+
+      if (!pkt.waitingForDispatch) {
+        pkt.progress += pkt.speed * delta;
+      }
       
       if (pkt.progress >= 1.0) {
         pkt.progress = 0;
@@ -96,6 +116,8 @@ export function CityLogisticsFlow({ active }: CityLogisticsFlowProps) {
         pkt.start.set(...n1.position);
         pkt.end.set(...n2.position);
         pkt.mid.set(Math.random() > 0.5 ? pkt.end.x : pkt.start.x, 0, Math.random() > 0.5 ? pkt.start.z : pkt.end.z);
+        pkt.originNodeId = n1.id;
+        pkt.waitingForDispatch = true; // Wait for next breathing cycle
       }
 
       // Interpolate along taxicab path
@@ -168,16 +190,26 @@ export function CityLogisticsFlow({ active }: CityLogisticsFlowProps) {
       />
 
       {/* Hover dependency routes */}
-      {hoverRoutes.map((routePts, idx) => (
-        <Line
-          key={`route-${idx}`}
-          points={routePts.map(p => [p.x, -0.02, p.z])}
-          color="#ffffff"
-          transparent
-          opacity={0.9}
-          lineWidth={2.5}
-        />
-      ))}
+      {hoverRoutes.map((routePts, idx) => {
+        // Animate hover routes to show directional data flow
+        const time = Date.now() * 0.002;
+        const dashOffset = time - (idx * 0.5); // Sequential offset
+        
+        return (
+          <Line
+            key={`route-${idx}`}
+            points={routePts.map(p => [p.x, -0.02, p.z])}
+            color="#ffffff"
+            transparent
+            opacity={0.9}
+            lineWidth={3.0}
+            dashed
+            dashScale={10}
+            dashSize={1}
+            dashOffset={dashOffset}
+          />
+        );
+      })}
     </group>
   );
 }
