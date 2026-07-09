@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { CITY_NODES } from "@/data/cityNodes";
 
@@ -33,7 +33,7 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
         // Check distance to landmarks to leave space
         let tooClose = false;
         for (const lp of landmarkPositions) {
-          if (Math.hypot(posX - lp.x, posZ - lp.y) < 3.0) { // Large negative space around districts
+          if (Math.hypot(posX - lp.x, posZ - lp.y) < 4.5) { // Increased negative space to prevent blocking
             tooClose = true;
             break;
           }
@@ -41,11 +41,14 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
 
         if (!tooClose) {
           // Randomize block heights to create urban landscape feel
-          // Taller in clusters to form a distinct skyline
           const distFromCenter = Math.hypot(posX, posZ);
           
           let maxH = 0.2;
-          if (distFromCenter > 5 && distFromCenter < 12) {
+          // Keep foreground blocks very short so they don't block the camera
+          if (posZ > 2) {
+            maxH = 0.2 + Math.random() * 0.3;
+          }
+          else if (distFromCenter > 5 && distFromCenter < 12) {
             // Mid-range skyline
             maxH = 2.0 + Math.random() * 2.0;
           } else if (distFromCenter >= 12 && distFromCenter < 25) {
@@ -69,8 +72,8 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
     return blocks;
   }, [totalCell, landmarkPositions]);
 
-  // Set instance matrices
-  useMemo(() => {
+  // Set instance matrices after mount
+  useEffect(() => {
     if (!meshRef.current) return;
     const dummy = new THREE.Object3D();
     blockData.forEach((block, i) => {
