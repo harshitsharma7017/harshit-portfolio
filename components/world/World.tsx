@@ -6,6 +6,7 @@ import { DatabaseZone } from "./zones/DatabaseZone";
 import { EqasOnlineZone } from "./zones/EqasOnlineZone";
 import { CityCoreZone } from "./zones/CityCoreZone";
 import { ProjectsZone } from "./zones/ProjectsZone";
+import { SkillsZone } from "./zones/SkillsZone";
 import { ContactZone } from "./zones/ContactZone";
 import { WorldLighting } from "./lighting/WorldLighting";
 
@@ -21,6 +22,7 @@ export function World() {
       <EqasOnlineZone />
       <CityCoreZone />
       <ProjectsZone />
+      <SkillsZone />
       <ContactZone />
     </>
   );

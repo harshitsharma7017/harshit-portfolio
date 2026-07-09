@@ -92,8 +92,26 @@ const STORY_DATA: StoryContent[] = [
     end: 0.79,
   },
   {
+    id: "skills",
+    title: "07 / SKILLS",
+    paragraphs: [
+      { heading: "Languages", body: "JavaScript (ES6+) • TypeScript • Python • Java" },
+      { heading: "Backend", body: "Node.js • Express.js • Fastify • REST API Design" },
+      { heading: "Frontend", body: "React • Next.js • Tailwind CSS" },
+      { heading: "Databases", body: "MongoDB • PostgreSQL • MySQL" },
+      { heading: "DevOps & Cloud", body: "Docker • GitHub Actions (CI/CD) • Vercel • Firebase • AWS" },
+      { heading: "Auth & Security", body: "JWT • OAuth 2.0 • Role-Based Access Control (RBAC)" },
+      { heading: "Tools", body: "Git • GitHub • Postman" },
+    ],
+    metadata: "Full Stack • Production Systems • Cloud-Native",
+    position: "bottom-left",
+    animation: "stagger",
+    start: 0.84,
+    end: 0.88,
+  },
+  {
     id: "contact",
-    title: "07 / LET'S BUILD",
+    title: "08 / LET'S BUILD",
     paragraphs: [
       "Everything you've seen represents how I approach engineering:",
       "Build reliable systems.\nSolve real problems.\nShip production software.",
@@ -103,7 +121,7 @@ const STORY_DATA: StoryContent[] = [
     metadata: "harshit.sharma8532@gmail.com • 7017855982 • github.com/harshitsharma7017 • linkedin.com/in/harshit-sharma-462a762b5",
     position: "center",
     animation: "terminal",
-    start: 0.88,
+    start: 0.93,
     end: 1.00,
   }
 ];
@@ -235,11 +253,27 @@ function StoryBlock({ story }: { story: StoryContent }) {
               {story.subtitle}
             </motion.div>
           )}
-          <div className="flex flex-col gap-2 md:gap-4 text-base md:text-2xl font-medium text-white/90 leading-tight">
+          <div className="flex flex-col gap-2 md:gap-3 text-base md:text-2xl font-medium text-white/90 leading-tight">
             {story.paragraphs?.map((p, idx) => (
               <motion.div key={idx} variants={childVariants.stagger}>
                 {typeof p === 'string' ? (
                   <span className="whitespace-pre-line">{p}</span>
+                ) : story.id === 'skills' ? (
+                  // Skills-specific chip layout
+                  <div className="flex flex-col gap-1 mt-1">
+                    <span className="text-[10px] md:text-xs font-semibold text-white/50 uppercase tracking-[0.15em]">{p.heading}</span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {p.body.split('•').map((chip, cIdx) => (
+                        <motion.span
+                          key={cIdx}
+                          variants={childVariants.stagger}
+                          className="inline-block text-[11px] md:text-sm font-medium text-white/80 bg-white/8 border border-white/15 rounded-md px-2 py-0.5 leading-normal"
+                        >
+                          {chip.trim()}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
                 ) : (
                   <div className="flex flex-col gap-1 mt-1 md:mt-2">
                     <span className="text-sm md:text-base font-bold text-white">{p.heading}</span>

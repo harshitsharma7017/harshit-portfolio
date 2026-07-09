@@ -5,6 +5,7 @@ export type ZoneId =
   | "eqas"
   | "citycore"
   | "projects"
+  | "skills"
   | "contact";
 
 export type ZoneState = "dormant" | "near" | "active";
@@ -33,6 +34,7 @@ export interface ProjectDefinition {
   stack: string;
   description: string;
   envColor: string;
+  imageUrl: string;
 }
 
 export interface CityNode {

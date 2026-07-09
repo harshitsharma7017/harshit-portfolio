@@ -8,6 +8,7 @@ export const PROJECTS: ProjectDefinition[] = [
     stack: "Node.js · React · MongoDB · Vercel",
     description: "Hyperlocal city services — 500+ active users",
     envColor: "#ffffff",
+    imageUrl: "/projects/citycore.png",
   },
   {
     id: "autofunds",
@@ -16,6 +17,7 @@ export const PROJECTS: ProjectDefinition[] = [
     stack: "React · Node.js · GPT-4",
     description: "AI finance — plain English to categorized budget",
     envColor: "#888888",
+    imageUrl: "/projects/autofunds.png",
   },
   {
     id: "taskmanager",
@@ -24,6 +26,7 @@ export const PROJECTS: ProjectDefinition[] = [
     stack: "Node.js · React · MongoDB · Express",
     description: "Multi-user tracking with JWT auth and RBAC",
     envColor: "#555555",
+    imageUrl: "/projects/taskmanager.jpg",
   },
 ];
 

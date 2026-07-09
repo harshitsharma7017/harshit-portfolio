@@ -19,9 +19,9 @@ export function ProjectsZone() {
   return (
     <group position={[0, 0, zone.zPosition]} scale={[scale, scale, scale]}>
       <ProjectsLighting active={active} />
-      <TerminalMesh position={[-3, 1, 0]} scale={0.9} active={active} />
-      <TerminalMesh position={[0, 1.2, -1]} scale={1} active={active} />
-      <TerminalMesh position={[3, 0.8, 0.5]} scale={0.85} active={active} />
+      <TerminalMesh position={[-2.5, 1, 0]} scale={0.9} active={active} imageUrl="/projects/autofunds.png" />
+      <TerminalMesh position={[0, 1.2, -1]} scale={1} active={active} imageUrl="/projects/citycore.png" />
+      <TerminalMesh position={[2.5, 0.8, 0.5]} scale={0.85} active={active} imageUrl="/projects/taskmanager.jpg" />
 
       {selected && (
         <group>

@@ -33,15 +33,21 @@ export const CAMERA_ANCHORS: Record<string, CameraAnchor> = {
     fov: 45,
   },
   projects: {
-    // Close intimate angle
-    position: [-3, 2, -82],
-    lookAt: [1, 0, -90],
+    // Center framed, pulled back slightly to fit wide layout
+    position: [0, 2, -78],
+    lookAt: [0, 0, -90],
     fov: 44,
+  },
+  skills: {
+    // Approach from low right — mirrors Database Network viewing angle
+    position: [5, -2, -102],
+    lookAt: [-1, 1.5, -110],
+    fov: 40,
   },
   contact: {
     // Monumental symmetry at the end
-    position: [0, 1.5, -102],
-    lookAt: [0, 1.5, -110],
+    position: [0, 1.5, -122],
+    lookAt: [0, 1.5, -130],
     fov: 35,
   },
 };
@@ -83,10 +89,16 @@ export const MOBILE_CAMERA_ANCHORS: Record<string, CameraAnchor> = {
     lookAt: [0, 0, -90],
     fov: 65,
   },
+  skills: {
+    // Close, low angle — mirrors mobile database viewing angle
+    position: [0, -4, -102],
+    lookAt: [0, 2, -110],
+    fov: 65,
+  },
   contact: {
     // Monumental but closer
-    position: [0, 2, -102],
-    lookAt: [0, 1.5, -110],
+    position: [0, 2, -122],
+    lookAt: [0, 1.5, -130],
     fov: 60,
   },
 };
