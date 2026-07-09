@@ -8,19 +8,18 @@ import { RelationshipBridges, type BridgeEdge } from "@/components/world/systems
 import { ContactLighting } from "@/components/world/systems/ContactLighting";
 import { useIsMobile } from "@/components/hooks/useExperienceState";
 
-// Generate a dense cluster for the right half of the viewport
 function generateContactCluster() {
   const collections: { id: string; position: [number, number, number]; radius: number; activityLevel: number }[] = [];
-  const count = 35; // 35 clusters = lots of density
+  const count = 45; // increased density for larger spread
   
   for (let i = 0; i < count; i++) {
-    // Position on the right side (x: 2 to 7, y: -4 to 6, z: -8 to 2)
-    const x = 2 + Math.random() * 5;
-    const y = -4 + Math.random() * 10;
+    // Position to cover exactly the right 50% of the viewport (x: 0.5 to 8, y: -5 to 7, z: -8 to 2)
+    const x = 0.5 + Math.random() * 7.5;
+    const y = -5 + Math.random() * 12;
     const z = -6 + Math.random() * 8;
     
     // Mix of small and medium nodes
-    const radius = 0.2 + Math.random() * 0.4;
+    const radius = 0.2 + Math.random() * 0.45;
     
     collections.push({
       id: `contact_node_${i}`,

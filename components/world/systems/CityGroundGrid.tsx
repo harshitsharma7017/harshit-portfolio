@@ -84,7 +84,7 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
 
 
   return (
-    <group>
+    <group visible={active}>
       {/* Base plane acting as the recessed road network */}
       <mesh position={[0, -0.05, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[70, 70]} />

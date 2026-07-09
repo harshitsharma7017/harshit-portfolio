@@ -319,6 +319,7 @@ function ContactTerminalUI() {
     { cmd: "linkedin", desc: "View my LinkedIn profile" },
     { cmd: "github", desc: "View my GitHub profile" },
     { cmd: "resume", desc: "Download my resume" },
+    { cmd: "contact", desc: "Send me a message" },
   ];
 
   const handleCommand = (e: React.FormEvent) => {
@@ -327,6 +328,20 @@ function ContactTerminalUI() {
     if (commands.find((c) => c.cmd === cmd)) {
       setTerminalCommand(cmd);
       setInputValue("");
+      
+      // Instantly trigger navigation / download on success
+      if (cmd === "linkedin") {
+        window.open("https://www.linkedin.com/in/harshit-sharma-backend-developer", "_blank");
+      } else if (cmd === "github") {
+        window.open("https://github.com/harshitsharma7017", "_blank");
+      } else if (cmd === "resume") {
+        const link = document.createElement("a");
+        link.href = "/Harshit_resume_latest.pdf";
+        link.download = "Harshit_resume_latest.pdf";
+        link.click();
+      } else if (cmd === "email") {
+        window.location.href = "mailto:harshit.sharma8532@gmail.com";
+      }
     } else {
       setInputValue("");
     }
@@ -374,23 +389,46 @@ function ContactTerminalUI() {
               <div className="flex flex-col">
                 {state.terminalCommand === "email" && (
                   <a href="mailto:harshit.sharma8532@gmail.com" className="text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors break-all">
-                    harshit.sharma8532<br className="md:hidden"/>@gmail.com
+                    harshit.sharma8532@gmail.com
                   </a>
                 )}
                 {state.terminalCommand === "linkedin" && (
-                  <a href="https://linkedin.com/in/harshit-sharma-462a762b5" target="_blank" rel="noreferrer" className="text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors break-all">
-                    linkedin.com/in/<br className="md:hidden"/>harshit-sharma
+                  <a href="https://www.linkedin.com/in/harshit-sharma-backend-developer" target="_blank" rel="noreferrer" className="text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors break-all">
+                    linkedin.com/in/harshit-sharma-backend-developer
                   </a>
                 )}
                 {state.terminalCommand === "github" && (
                   <a href="https://github.com/harshitsharma7017" target="_blank" rel="noreferrer" className="text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors break-all">
-                    github.com/<br className="md:hidden"/>harshitsharma7017
+                    github.com/harshitsharma7017
                   </a>
                 )}
                 {state.terminalCommand === "resume" && (
-                  <a href="/resume.pdf" target="_blank" rel="noreferrer" className="text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors">
-                    View Resume.pdf
+                  <a href="/Harshit_resume_latest.pdf" target="_blank" rel="noreferrer" className="text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors" download>
+                    Download Harshit_resume_latest.pdf
                   </a>
+                )}
+                {state.terminalCommand === "contact" && (
+                  <div className="flex flex-col gap-4">
+                    <div className="text-white/60 text-xs tracking-widest uppercase">Enter your email for CC (optional):</div>
+                    <div className="flex items-center gap-3 w-full border-b border-white/20 pb-2 focus-within:border-white/60 transition-colors pointer-events-auto">
+                      <span className="text-green-400 text-base">{">"}</span>
+                      <input 
+                        type="email" 
+                        placeholder="you@example.com"
+                        className="bg-transparent border-none outline-none flex-1 text-white placeholder-white/20 text-base"
+                        onChange={(e) => {
+                          const el = document.getElementById("contact-mailto") as HTMLAnchorElement;
+                          const cc = e.target.value.trim();
+                          if (el) {
+                            el.href = `mailto:harshit.sharma8532@gmail.com?subject=Contact Request from Portfolio${cc ? `&cc=${encodeURIComponent(cc)}` : ''}`;
+                          }
+                        }}
+                      />
+                    </div>
+                    <a id="contact-mailto" href="mailto:harshit.sharma8532@gmail.com?subject=Contact Request from Portfolio" className="mt-2 text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors pointer-events-auto underline underline-offset-4 decoration-white/20">
+                      [ Initialize Message ]
+                    </a>
+                  </div>
                 )}
               </div>
 
