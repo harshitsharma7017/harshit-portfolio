@@ -38,6 +38,7 @@ const initialState: ExperienceState = {
   reducedMotion: false,
   currentSceneIndex: 0,
   isTransitioning: false,
+  terminalCommand: null,
 };
 
 function experienceReducer(
@@ -86,6 +87,8 @@ function experienceReducer(
       return { ...state, currentSceneIndex: action.index };
     case "SET_TRANSITIONING":
       return { ...state, isTransitioning: action.transitioning };
+    case "SET_TERMINAL_COMMAND":
+      return { ...state, terminalCommand: action.command };
     default:
       return state;
   }
@@ -103,6 +106,7 @@ interface ExperienceContextValue {
   setReducedMotion: (reduced: boolean) => void;
   setSceneIndex: (index: number) => void;
   setTransitioning: (transitioning: boolean) => void;
+  setTerminalCommand: (command: string | null) => void;
 }
 
 const ExperienceContext = createContext<ExperienceContextValue | null>(null);
@@ -153,6 +157,10 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "SET_TRANSITIONING", transitioning });
   }, []);
 
+  const setTerminalCommand = useCallback((command: string | null) => {
+    dispatch({ type: "SET_TERMINAL_COMMAND", command });
+  }, []);
+
   const value = useMemo(
     () => ({
       state,
@@ -166,6 +174,7 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
       setReducedMotion,
       setSceneIndex,
       setTransitioning,
+      setTerminalCommand,
     }),
     [
       state,
@@ -179,6 +188,7 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
       setReducedMotion,
       setSceneIndex,
       setTransitioning,
+      setTerminalCommand,
     ]
   );
 

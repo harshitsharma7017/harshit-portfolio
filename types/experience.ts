@@ -58,6 +58,7 @@ export interface ExperienceState {
   reducedMotion: boolean;
   currentSceneIndex: number;
   isTransitioning: boolean;
+  terminalCommand: string | null;
 }
 
 export type ExperienceAction =
@@ -72,7 +73,8 @@ export type ExperienceAction =
   | { type: "SET_CONTACT_REVEALED"; revealed: boolean }
   | { type: "SET_REDUCED_MOTION"; reduced: boolean }
   | { type: "SET_SCENE_INDEX"; index: number }
-  | { type: "SET_TRANSITIONING"; transitioning: boolean };
+  | { type: "SET_TRANSITIONING"; transitioning: boolean }
+  | { type: "SET_TERMINAL_COMMAND"; command: string | null };
 
 export interface CameraAnchor {
   position: [number, number, number];
