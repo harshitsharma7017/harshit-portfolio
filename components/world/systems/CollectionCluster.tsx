@@ -10,6 +10,7 @@ interface CollectionClusterProps {
   radius: number;
   activityLevel: number; // 0–1, controls LED pulse rate and status point density
   onRegisterTrigger?: (id: string, trigger: () => void) => void;
+  variant?: "default" | "bright";
 }
 
 // Distribute points on a sphere surface using golden spiral
@@ -35,6 +36,7 @@ export function CollectionCluster({
   radius,
   activityLevel,
   onRegisterTrigger,
+  variant = "default",
 }: CollectionClusterProps) {
   const groupRef = useRef<THREE.Group>(null);
   const innerRef = useRef<THREE.Mesh>(null);
@@ -114,14 +116,27 @@ export function CollectionCluster({
       {/* Outer shell — faceted icosahedron */}
       <mesh>
         <icosahedronGeometry args={[radius, 1]} />
-        <meshStandardMaterial
-          color="#111111"
-          roughness={0.5}
-          metalness={0.7}
-          transparent
-          opacity={0.4}
-          side={THREE.DoubleSide}
-        />
+        {variant === "bright" ? (
+          <meshPhysicalMaterial
+            color="#888888"
+            roughness={0.1}
+            metalness={0.8}
+            transmission={0.9}
+            thickness={0.5}
+            transparent
+            opacity={1}
+            side={THREE.DoubleSide}
+          />
+        ) : (
+          <meshStandardMaterial
+            color="#111111"
+            roughness={0.5}
+            metalness={0.7}
+            transparent
+            opacity={0.4}
+            side={THREE.DoubleSide}
+          />
+        )}
       </mesh>
 
       {/* Wireframe overlay — faceted edge lines */}
@@ -140,26 +155,49 @@ export function CollectionCluster({
       {/* Inner core — denser, packed documents */}
       <mesh ref={innerRef}>
         <icosahedronGeometry args={[radius * 0.55, 1]} />
-        <meshStandardMaterial
-          color="#080808"
-          roughness={0.95}
-          metalness={0.15}
-          transparent
-          opacity={0.85}
-        />
+        {variant === "bright" ? (
+          <meshStandardMaterial
+            color="#222222"
+            emissive="#ffffff"
+            emissiveIntensity={0.2}
+            roughness={0.8}
+            metalness={0.5}
+            transparent
+            opacity={0.9}
+          />
+        ) : (
+          <meshStandardMaterial
+            color="#080808"
+            roughness={0.95}
+            metalness={0.15}
+            transparent
+            opacity={0.85}
+          />
+        )}
       </mesh>
 
       {/* Inner core wireframe — document structure hint */}
       <mesh ref={innerRef ? undefined : undefined}>
         <icosahedronGeometry args={[radius * 0.56, 2]} />
-        <meshStandardMaterial
-          color="#222222"
-          wireframe
-          roughness={0.3}
-          metalness={0.9}
-          transparent
-          opacity={0.06}
-        />
+        {variant === "bright" ? (
+          <meshStandardMaterial
+            color="#ffffff"
+            wireframe
+            roughness={0.3}
+            metalness={0.9}
+            transparent
+            opacity={0.15}
+          />
+        ) : (
+          <meshStandardMaterial
+            color="#222222"
+            wireframe
+            roughness={0.3}
+            metalness={0.9}
+            transparent
+            opacity={0.06}
+          />
+        )}
       </mesh>
 
       {/* Status LEDs — write/read operations */}

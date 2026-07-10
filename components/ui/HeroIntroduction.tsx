@@ -56,7 +56,7 @@ export function HeroIntroduction() {
   };
 
   const facts = [
-    "1+ Years Experience",
+    "1.5+ Years Experience",
     "Backend Specialist",
     "Production Systems",
     "2 Startup Experiences"
@@ -78,12 +78,13 @@ export function HeroIntroduction() {
         >
           {/* Content (100% on mobile, 55% on desktop) */}
           <motion.div 
-            className="w-full md:w-[55%] h-1/2 md:h-full flex flex-col justify-center px-6 pt-12 md:px-24 md:pt-0 z-20"
+            className="w-full md:w-[55%] lg:w-[50%] h-1/2 md:h-full flex flex-col justify-center pr-6 pt-12 md:pr-12 md:pt-0 z-20"
+            style={{ paddingLeft: "clamp(1rem, 4vw, 4rem)" }}
             variants={containerVariants}
           >
             <motion.h1 
               variants={fadeVariant}
-              className="text-3xl md:text-6xl font-bold tracking-[0.2em] text-white uppercase mb-2 md:mb-4"
+              className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-[0.15em] md:tracking-[0.2em] text-white uppercase mb-2 md:mb-4 break-words"
             >
               Harshit Sharma
             </motion.h1>

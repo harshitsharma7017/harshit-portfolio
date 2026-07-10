@@ -96,6 +96,7 @@ export function ContactZone() {
           radius={col.radius}
           activityLevel={col.activityLevel}
           onRegisterTrigger={handleRegisterTrigger}
+          variant="bright"
         />
       ))}
 

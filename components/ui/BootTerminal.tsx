@@ -62,7 +62,8 @@ export function BootTerminal() {
       className="fixed inset-0 z-20 pointer-events-none"
       style={{
         background: state.bootComplete ? "transparent" : "#0a0a0a",
-        transition: "background 1.2s ease",
+        opacity: state.bootComplete ? 0 : 1,
+        transition: "background 1.2s ease, opacity 1.2s ease",
       }}
     >
       {/* Central Progress Loader */}

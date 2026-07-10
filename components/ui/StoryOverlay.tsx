@@ -310,6 +310,55 @@ function StoryBlock({ story }: { story: StoryContent }) {
   );
 }
 
+function ConnectForm() {
+  const { setTerminalCommand } = useExperienceContext();
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !message) return;
+    
+    // Construct mailto link
+    window.location.href = `mailto:harshit.sharma8532@gmail.com?subject=Connect from Portfolio&body=${encodeURIComponent(message)}%0A%0AFrom: ${encodeURIComponent(email)}`;
+    
+    // Reset terminal after launching mail client
+    setTerminalCommand(null);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 font-mono w-full">
+      <div className="flex flex-col gap-2">
+        <label className="text-green-400 text-xs tracking-widest uppercase">visitor_email:</label>
+        <input 
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          className="bg-black/50 border border-white/20 p-2 text-white outline-none focus:border-green-400 transition-colors text-sm"
+          required
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label className="text-green-400 text-xs tracking-widest uppercase">message_body:</label>
+        <textarea 
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Hello Harshit..."
+          className="bg-black/50 border border-white/20 p-2 text-white outline-none focus:border-green-400 transition-colors h-24 resize-none text-sm"
+          required
+        />
+      </div>
+      <button 
+        type="submit"
+        className="self-start px-6 py-2 bg-green-500/20 hover:bg-green-500/40 text-green-400 border border-green-500/50 rounded transition-colors uppercase tracking-widest text-xs"
+      >
+        Send Message
+      </button>
+    </form>
+  );
+}
+
 function ContactTerminalUI() {
   const { state, setTerminalCommand } = useExperienceContext();
   const [inputValue, setInputValue] = useState("");
@@ -319,6 +368,7 @@ function ContactTerminalUI() {
     { cmd: "linkedin", desc: "View my LinkedIn profile" },
     { cmd: "github", desc: "View my GitHub profile" },
     { cmd: "resume", desc: "Download my resume" },
+    { cmd: "connect", desc: "Send me a direct message" },
   ];
 
   const handleCommand = (e: React.FormEvent) => {
@@ -377,6 +427,9 @@ function ContactTerminalUI() {
               <div className="text-lg md:text-xl font-mono">
                 <a href="/resume.pdf" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors">View Resume PDF</a>
               </div>
+            )}
+            {state.terminalCommand === "connect" && (
+              <ConnectForm />
             )}
 
             <button 
