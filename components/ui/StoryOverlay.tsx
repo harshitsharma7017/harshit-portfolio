@@ -21,7 +21,7 @@ interface StoryContent {
 const STORY_DATA: StoryContent[] = [
   {
     id: "backend",
-    title: "02 / BACKEND DEVELOPMENT",
+    title: "01 / BACKEND DEVELOPMENT",
     paragraphs: [
       "I specialize in Node.js, Express, and Fastify backends using TypeScript.",
       "I design REST APIs with schema-level request validation, structured error handling, and consistent response contracts.",
@@ -35,7 +35,7 @@ const STORY_DATA: StoryContent[] = [
   },
   {
     id: "database",
-    title: "03 / DATA INFRASTRUCTURE",
+    title: "02 / DATA INFRASTRUCTURE",
     paragraphs: [
       "Good software depends on reliable data infrastructure.",
       "I have hands-on experience cutting response times on high-traffic endpoints by restructuring slow MongoDB and PostgreSQL aggregation pipelines.",
@@ -49,7 +49,7 @@ const STORY_DATA: StoryContent[] = [
   },
   {
     id: "eqas",
-    title: "04 / EQASONLINE",
+    title: "03 / EQASONLINE",
     subtitle: "Current Role: Full Stack Developer",
     paragraphs: [
       "I own the end-to-end backend for a laboratory proficiency testing platform used across multiple institutions.",
@@ -64,7 +64,7 @@ const STORY_DATA: StoryContent[] = [
   },
   {
     id: "citycore",
-    title: "05 / CITYCORE",
+    title: "04 / CITYCORE",
     subtitle: "Founder & Full Stack Developer",
     paragraphs: [
       "CityCore is a Hyperlocal City Services Platform I built and shipped as the sole developer, currently serving 500+ users.",
@@ -79,7 +79,7 @@ const STORY_DATA: StoryContent[] = [
   },
   {
     id: "projects",
-    title: "06 / ENGINEERING PROJECTS",
+    title: "05 / ENGINEERING PROJECTS",
     paragraphs: [
       "Beyond my professional work, I build products that solve practical problems.",
       { heading: "Task Management System", body: "Full-stack tracking app with JWT authentication and RBAC. I designed the schema-level data model to handle multi-user task ownership, keeping authorization logic clean and separate." },
@@ -93,7 +93,7 @@ const STORY_DATA: StoryContent[] = [
   },
   {
     id: "skills",
-    title: "07 / SKILLS",
+    title: "06 / SKILLS",
     paragraphs: [
       { heading: "Languages", body: "JavaScript (ES6+) • TypeScript • Python • Java" },
       { heading: "Backend", body: "Node.js • Express.js • Fastify • REST API Design" },
@@ -111,7 +111,7 @@ const STORY_DATA: StoryContent[] = [
   },
   {
     id: "contact",
-    title: "08 / LET'S BUILD",
+    title: "07 / LET'S BUILD",
     paragraphs: [
       "Everything you've seen represents how I approach engineering:",
       "Build reliable systems.\nSolve real problems.\nShip production software.",
@@ -325,6 +325,11 @@ function ContactTerminalUI() {
     e.preventDefault();
     const cmd = inputValue.trim().toLowerCase();
     if (commands.find((c) => c.cmd === cmd)) {
+      if (cmd === "linkedin") window.open("https://www.linkedin.com/in/harshit-sharma-backend-developer", "_blank");
+      if (cmd === "github") window.open("https://github.com/harshitsharma7017", "_blank");
+      if (cmd === "resume") window.open("/resume.pdf", "_blank");
+      if (cmd === "email") window.location.href = "mailto:harshit.sharma8532@gmail.com";
+      
       setTerminalCommand(cmd);
       setInputValue("");
     } else {
@@ -340,7 +345,7 @@ function ContactTerminalUI() {
         <div className="flex flex-col gap-2 font-mono text-sm md:text-base text-white/80">
           {commands.map((c) => (
             <div key={c.cmd} className="flex flex-col xl:flex-row xl:gap-4">
-              <span className="text-green-400 w-24">{">"} {c.cmd}</span>
+              <span className="text-green-400 w-32 shrink-0 whitespace-nowrap">{">"} {c.cmd}</span>
               <span className="text-white/50">{c.desc}</span>
             </div>
           ))}

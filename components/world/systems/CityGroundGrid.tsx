@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useEffect } from "react";
 import * as THREE from "three";
 import { CITY_NODES } from "@/data/cityNodes";
 
@@ -30,6 +30,9 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
         const posX = x * totalCell;
         const posZ = z * totalCell;
         
+        // Prevent city grid from spilling over into EqasOnline (-55), Database (-40), and Projects (-85)
+        if (posZ > 12 || posZ < -8) continue;
+
         // Check distance to landmarks to leave space
         let tooClose = false;
         for (const lp of landmarkPositions) {
@@ -70,7 +73,7 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
   }, [totalCell, landmarkPositions]);
 
   // Set instance matrices
-  useMemo(() => {
+  useEffect(() => {
     if (!meshRef.current) return;
     const dummy = new THREE.Object3D();
     blockData.forEach((block, i) => {
@@ -85,9 +88,9 @@ export function CityGroundGrid({ active }: CityGroundGridProps) {
 
   return (
     <group>
-      {/* Base plane acting as the recessed road network */}
-      <mesh position={[0, -0.05, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <planeGeometry args={[70, 70]} />
+      {/* Base plane acting as the recessed road network, restricted to not invade other zones */}
+      <mesh position={[0, -0.05, 2]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[70, 22]} />
         <meshStandardMaterial
           color="#060606"
           roughness={0.98}

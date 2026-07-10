@@ -21,9 +21,9 @@ export const CAMERA_ANCHORS: Record<string, CameraAnchor> = {
     fov: 40,
   },
   eqas: {
-    // Dead on but low, industrial scale
-    position: [0, 0.5, -48],
-    lookAt: [0, 2, -55],
+    // Elevated to clearly see the ascending production line
+    position: [0, 5, -46],
+    lookAt: [0, 0, -55],
     fov: 44,
   },
   citycore: {
