@@ -237,6 +237,20 @@ function StoryBlock({ story }: { story: StoryContent }) {
     </>
   );
 
+  if (story.id === "contact") {
+    return (
+      <motion.div
+        className="fixed inset-0 w-full h-full pointer-events-none"
+        variants={variants[story.animation]}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
+        <ContactTerminalUI />
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       className={`${positionClasses} flex flex-col gap-1 max-w-xl md:w-full bg-black/20 p-4 md:p-6 rounded-lg backdrop-blur-sm`}
