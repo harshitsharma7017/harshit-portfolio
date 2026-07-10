@@ -319,7 +319,6 @@ function ContactTerminalUI() {
     { cmd: "linkedin", desc: "View my LinkedIn profile" },
     { cmd: "github", desc: "View my GitHub profile" },
     { cmd: "resume", desc: "Download my resume" },
-    { cmd: "contact", desc: "Send me a message" },
   ];
 
   const handleCommand = (e: React.FormEvent) => {
@@ -328,142 +327,75 @@ function ContactTerminalUI() {
     if (commands.find((c) => c.cmd === cmd)) {
       setTerminalCommand(cmd);
       setInputValue("");
-      
-      // Instantly trigger navigation / download on success
-      if (cmd === "linkedin") {
-        window.open("https://www.linkedin.com/in/harshit-sharma-backend-developer", "_blank");
-      } else if (cmd === "github") {
-        window.open("https://github.com/harshitsharma7017", "_blank");
-      } else if (cmd === "resume") {
-        const link = document.createElement("a");
-        link.href = "/Harshit_resume_latest.pdf";
-        link.download = "Harshit_resume_latest.pdf";
-        link.click();
-      } else if (cmd === "email") {
-        window.location.href = "mailto:harshit.sharma8532@gmail.com";
-      }
     } else {
       setInputValue("");
     }
   };
 
   return (
-    <div className="absolute bottom-[env(safe-area-inset-bottom,2rem)] md:bottom-24 left-6 md:left-24 text-left items-start flex flex-col gap-1 max-w-xl md:w-full bg-black/20 p-4 md:p-6 rounded-lg backdrop-blur-sm pointer-events-auto">
-      
-      {/* Title / Heading */}
-      <div className="text-[10px] md:text-xs tracking-[0.2em] text-white/40 uppercase mb-2 md:mb-4">
-        08 / SYSTEM TERMINAL
+    <div className="w-full h-full relative pointer-events-none">
+      {/* Commands List - Bottom Left */}
+      <div className="absolute bottom-[env(safe-area-inset-bottom,2rem)] md:bottom-24 left-6 md:left-12 flex flex-col gap-4 text-white p-6 bg-black/40 backdrop-blur-md rounded-lg border border-white/10 w-[90%] max-w-xs md:max-w-sm pointer-events-auto">
+        <div className="text-xs tracking-widest text-white/40 uppercase mb-2">Terminal Access</div>
+        <div className="flex flex-col gap-2 font-mono text-sm md:text-base text-white/80">
+          {commands.map((c) => (
+            <div key={c.cmd} className="flex flex-col xl:flex-row xl:gap-4">
+              <span className="text-green-400 w-24">{">"} {c.cmd}</span>
+              <span className="text-white/50">{c.desc}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-8 w-full items-start">
-        {/* Commands List */}
-        <div className="flex flex-col gap-4 w-full md:w-64">
-          <div className="text-[10px] tracking-widest text-white/40 uppercase">
-            Available Commands
-          </div>
-          <div className="flex flex-wrap md:flex-col gap-3 font-mono">
-            {commands.map((c) => (
-              <div key={c.cmd} className="flex flex-col gap-1 group cursor-pointer" onClick={() => {
-                setTerminalCommand(c.cmd);
-                setInputValue("");
-              }}>
-                <span className="text-sm md:text-base text-white/80 group-hover:text-green-400 transition-colors">
-                  <span className="text-green-400">{">"}</span> {c.cmd}
-                </span>
-                <span className="hidden md:inline-block text-white/40 text-[10px] tracking-widest uppercase">
-                  {c.desc}
-                </span>
+      {/* Input / Output - Center */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-4 text-white p-6 bg-black/60 backdrop-blur-md rounded-lg border border-white/10 w-[90%] max-w-lg pointer-events-auto">
+        {state.terminalCommand ? (
+          <>
+            <div className="text-xs tracking-widest text-white/40 uppercase">Output: {state.terminalCommand}</div>
+            
+            {state.terminalCommand === "email" && (
+              <div className="text-lg md:text-xl font-mono">
+                <a href="mailto:harshit.sharma8532@gmail.com" className="hover:text-blue-400 transition-colors">harshit.sharma8532@gmail.com</a>
               </div>
-            ))}
-          </div>
-        </div>
+            )}
+            {state.terminalCommand === "linkedin" && (
+              <div className="text-lg md:text-xl font-mono truncate">
+                <a href="https://linkedin.com/in/harshit-sharma-462a762b5" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors">linkedin.com/in/harshit-sharma-462a762b5</a>
+              </div>
+            )}
+            {state.terminalCommand === "github" && (
+              <div className="text-lg md:text-xl font-mono truncate">
+                <a href="https://github.com/harshitsharma7017" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors">github.com/harshitsharma7017</a>
+              </div>
+            )}
+            {state.terminalCommand === "resume" && (
+              <div className="text-lg md:text-xl font-mono">
+                <a href="/resume.pdf" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors">View Resume PDF</a>
+              </div>
+            )}
 
-        {/* Terminal Area */}
-        <div className="flex-1 flex flex-col w-full min-h-[140px] md:min-h-[180px] justify-end border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
-          {state.terminalCommand ? (
-            <div className="flex flex-col gap-4 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="text-[10px] tracking-widest uppercase text-white/40">
-                Execution: {state.terminalCommand}
-              </div>
-              
-              <div className="flex flex-col">
-                {state.terminalCommand === "email" && (
-                  <a href="mailto:harshit.sharma8532@gmail.com" className="text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors break-all">
-                    harshit.sharma8532@gmail.com
-                  </a>
-                )}
-                {state.terminalCommand === "linkedin" && (
-                  <a href="https://www.linkedin.com/in/harshit-sharma-backend-developer" target="_blank" rel="noreferrer" className="text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors break-all">
-                    linkedin.com/in/harshit-sharma-backend-developer
-                  </a>
-                )}
-                {state.terminalCommand === "github" && (
-                  <a href="https://github.com/harshitsharma7017" target="_blank" rel="noreferrer" className="text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors break-all">
-                    github.com/harshitsharma7017
-                  </a>
-                )}
-                {state.terminalCommand === "resume" && (
-                  <a href="/Harshit_resume_latest.pdf" target="_blank" rel="noreferrer" className="text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors" download>
-                    Download Harshit_resume_latest.pdf
-                  </a>
-                )}
-                {state.terminalCommand === "contact" && (
-                  <div className="flex flex-col gap-4">
-                    <div className="text-white/60 text-xs tracking-widest uppercase">Enter your email for CC (optional):</div>
-                    <div className="flex items-center gap-3 w-full border-b border-white/20 pb-2 focus-within:border-white/60 transition-colors pointer-events-auto">
-                      <span className="text-green-400 text-base">{">"}</span>
-                      <input 
-                        type="email" 
-                        placeholder="you@example.com"
-                        className="bg-transparent border-none outline-none flex-1 text-white placeholder-white/20 text-base"
-                        onChange={(e) => {
-                          const el = document.getElementById("contact-mailto") as HTMLAnchorElement;
-                          const cc = e.target.value.trim();
-                          if (el) {
-                            el.href = `mailto:harshit.sharma8532@gmail.com?subject=Contact Request from Portfolio${cc ? `&cc=${encodeURIComponent(cc)}` : ''}`;
-                          }
-                        }}
-                      />
-                    </div>
-                    <a id="contact-mailto" href="mailto:harshit.sharma8532@gmail.com?subject=Contact Request from Portfolio" className="mt-2 text-base md:text-lg font-mono text-white/90 hover:text-green-400 transition-colors pointer-events-auto underline underline-offset-4 decoration-white/20">
-                      [ Initialize Message ]
-                    </a>
-                  </div>
-                )}
-              </div>
-
-              <button 
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setTerminalCommand(null);
-                }}
-                className="mt-4 text-[10px] font-mono uppercase tracking-widest text-white/40 hover:text-white flex items-center gap-2 transition-all cursor-pointer group w-fit"
-              >
-                <span className="group-hover:-translate-x-1 transition-transform duration-300">&larr;</span> Reset Terminal
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleCommand} className="flex flex-col gap-4 font-mono w-full animate-in fade-in slide-in-from-bottom-4 duration-500 mt-auto">
-              <div className="text-[10px] tracking-widest uppercase text-white/40">
-                System Console
-              </div>
-              <div className="flex items-center gap-3 w-full border-b border-white/20 pb-2 focus-within:border-white/60 transition-colors">
-                <span className="text-green-400 text-lg md:text-xl leading-none">$</span>
-                <input 
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="awaiting_input..."
-                  className="bg-transparent border-none outline-none flex-1 text-white placeholder-white/20 text-lg md:text-xl leading-none w-full"
-                  autoFocus
-                />
-              </div>
-              <button type="submit" className="hidden">Enter</button>
-            </form>
-          )}
-        </div>
+            <button 
+              type="button"
+              onClick={() => setTerminalCommand(null)}
+              className="mt-4 self-start px-4 py-2 bg-white/10 hover:bg-white/20 rounded text-xs font-mono uppercase tracking-widest text-white flex items-center gap-2 transition-colors cursor-pointer"
+            >
+              <span>←</span> Return to Terminal
+            </button>
+          </>
+        ) : (
+          <form onSubmit={handleCommand} className="flex items-center gap-3 font-mono text-base md:text-lg">
+            <span className="text-green-400">$</span>
+            <input 
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder="Type a command..."
+              className="bg-transparent border-none outline-none flex-1 text-white placeholder-white/30"
+              autoFocus
+            />
+            <button type="submit" className="hidden">Enter</button>
+          </form>
+        )}
       </div>
     </div>
   );
