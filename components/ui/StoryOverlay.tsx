@@ -198,32 +198,32 @@ function StoryBlock({ story }: { story: StoryContent }) {
 
   const renderContent = () => (
     <>
-      <div className="text-[10px] md:text-xs tracking-[0.2em] text-white/40 uppercase mb-1 md:mb-2">
+      <div className="text-[8px] md:text-[10px] tracking-[0.2em] text-white/40 uppercase mb-1 md:mb-2">
         {story.title}
       </div>
       
       {story.subtitle && (
-        <div className="text-xs md:text-base font-semibold text-white/60 uppercase tracking-wide mb-1 md:mb-2">
+        <div className="text-[10px] md:text-sm font-semibold text-white/60 uppercase tracking-wide mb-1 md:mb-2">
           {story.subtitle}
         </div>
       )}
 
-      <div className="flex flex-col gap-2 md:gap-4 text-base md:text-2xl font-medium text-white/90 leading-tight">
+      <div className="flex flex-col gap-2 md:gap-4 text-sm md:text-lg font-medium text-white/90 leading-tight">
         {story.paragraphs?.map((p, idx) => (
           <div key={idx}>
             {typeof p === 'string' ? (
               <span className="whitespace-pre-line">{p}</span>
             ) : (
               <div className="flex flex-col gap-1 mt-1 md:mt-2">
-                <span className="text-sm md:text-base font-bold text-white">{p.heading}</span>
-                <span className="text-base md:text-xl text-white/80">{p.body}</span>
+                <span className="text-xs md:text-sm font-bold text-white">{p.heading}</span>
+                <span className="text-sm md:text-lg text-white/80">{p.body}</span>
               </div>
             )}
           </div>
         ))}
       </div>
 
-      <div className="text-[8px] md:text-xs font-mono text-white/40 mt-2 md:mt-4">
+      <div className="text-[6px] md:text-[10px] font-mono text-white/40 mt-2 md:mt-4">
         {story.metadata}
       </div>
       
@@ -237,20 +237,6 @@ function StoryBlock({ story }: { story: StoryContent }) {
     </>
   );
 
-  if (story.id === "contact") {
-    return (
-      <motion.div
-        className="fixed inset-0 w-full h-full pointer-events-none"
-        variants={variants[story.animation]}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-      >
-        <ContactTerminalUI />
-      </motion.div>
-    );
-  }
-
   return (
     <motion.div
       className={`${positionClasses} flex flex-col gap-1 max-w-xl md:w-full bg-black/20 p-4 md:p-6 rounded-lg backdrop-blur-sm`}
@@ -261,29 +247,28 @@ function StoryBlock({ story }: { story: StoryContent }) {
     >
       {story.animation === "stagger" ? (
         <>
-          <motion.div variants={childVariants.stagger} className="text-[10px] md:text-xs tracking-[0.2em] text-white/40 uppercase mb-1 md:mb-2">
+          <motion.div variants={childVariants.stagger} className="text-[8px] md:text-[10px] tracking-[0.2em] text-white/40 uppercase mb-1 md:mb-2">
             {story.title}
           </motion.div>
           {story.subtitle && (
-            <motion.div variants={childVariants.stagger} className="text-xs md:text-base font-semibold text-white/60 uppercase tracking-wide mb-1 md:mb-2">
+            <motion.div variants={childVariants.stagger} className="text-[10px] md:text-sm font-semibold text-white/60 uppercase tracking-wide mb-1 md:mb-2">
               {story.subtitle}
             </motion.div>
           )}
-          <div className="flex flex-col gap-2 md:gap-3 text-base md:text-2xl font-medium text-white/90 leading-tight">
+          <div className="flex flex-col gap-2 md:gap-3 text-sm md:text-lg font-medium text-white/90 leading-tight">
             {story.paragraphs?.map((p, idx) => (
               <motion.div key={idx} variants={childVariants.stagger}>
                 {typeof p === 'string' ? (
                   <span className="whitespace-pre-line">{p}</span>
                 ) : story.id === 'skills' ? (
-                  // Skills-specific chip layout
                   <div className="flex flex-col gap-1 mt-1">
-                    <span className="text-[10px] md:text-xs font-semibold text-white/50 uppercase tracking-[0.15em]">{p.heading}</span>
+                    <span className="text-[8px] md:text-[10px] font-semibold text-white/50 uppercase tracking-[0.15em]">{p.heading}</span>
                     <div className="flex flex-wrap gap-1.5">
                       {p.body.split('•').map((chip, cIdx) => (
                         <motion.span
                           key={cIdx}
                           variants={childVariants.stagger}
-                          className="inline-block text-[11px] md:text-sm font-medium text-white/80 bg-white/8 border border-white/15 rounded-md px-2 py-0.5 leading-normal"
+                          className="inline-block text-[9px] md:text-xs font-medium text-white/80 bg-white/8 border border-white/15 rounded-md px-2 py-0.5 leading-normal"
                         >
                           {chip.trim()}
                         </motion.span>
@@ -292,14 +277,14 @@ function StoryBlock({ story }: { story: StoryContent }) {
                   </div>
                 ) : (
                   <div className="flex flex-col gap-1 mt-1 md:mt-2">
-                    <span className="text-sm md:text-base font-bold text-white">{p.heading}</span>
-                    <span className="text-base md:text-xl text-white/80">{p.body}</span>
+                    <span className="text-xs md:text-sm font-bold text-white">{p.heading}</span>
+                    <span className="text-sm md:text-lg text-white/80">{p.body}</span>
                   </div>
                 )}
               </motion.div>
             ))}
           </div>
-          <motion.div variants={childVariants.stagger} className="text-[8px] md:text-xs font-mono text-white/40 mt-2 md:mt-4">
+          <motion.div variants={childVariants.stagger} className="text-[6px] md:text-[10px] font-mono text-white/40 mt-2 md:mt-4">
             {story.metadata}
           </motion.div>
         </>
@@ -419,12 +404,12 @@ function ContactTerminalUI() {
               </div>
             )}
             {state.terminalCommand === "github" && (
-              <div className="text-lg md:text-xl font-mono truncate">
+              <div className="text-base md:text-lg font-mono truncate">
                 <a href="https://github.com/harshitsharma7017" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors">github.com/harshitsharma7017</a>
               </div>
             )}
             {state.terminalCommand === "resume" && (
-              <div className="text-lg md:text-xl font-mono">
+              <div className="text-base md:text-lg font-mono">
                 <a href="/resume.pdf" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors">View Resume PDF</a>
               </div>
             )}

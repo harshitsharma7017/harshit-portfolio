@@ -84,21 +84,21 @@ export function HeroIntroduction() {
           >
             <motion.h1 
               variants={fadeVariant}
-              className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-[0.15em] md:tracking-[0.2em] text-white uppercase mb-2 md:mb-4 break-words"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-[0.15em] md:tracking-[0.2em] text-white uppercase mb-2 md:mb-4 break-words"
             >
               Harshit Sharma
             </motion.h1>
             
             <motion.h2 
               variants={fadeVariant}
-              className="text-lg md:text-2xl text-white/60 font-semibold uppercase tracking-widest mb-4 md:mb-6"
+              className="text-sm md:text-lg text-white/60 font-semibold uppercase tracking-widest mb-4 md:mb-6"
             >
               Full Stack Engineer
             </motion.h2>
             
             <motion.p 
               variants={fadeVariant}
-              className="text-base md:text-xl text-white/80 max-w-2xl leading-relaxed mb-6 md:mb-10"
+              className="text-sm md:text-base text-white/80 max-w-2xl leading-relaxed mb-6 md:mb-10"
             >
               Backend-focused developer passionate about building scalable systems, production APIs, and modern web applications.
             </motion.p>
@@ -107,14 +107,14 @@ export function HeroIntroduction() {
               {facts.map((fact, index) => (
                 <motion.div key={index} variants={fadeUpVariant} className="flex items-center gap-3 md:gap-4">
                   <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
-                  <span className="text-white/80 text-sm md:text-lg">{fact}</span>
+                  <span className="text-white/80 text-xs md:text-sm">{fact}</span>
                 </motion.div>
               ))}
             </div>
 
             <motion.div variants={fadeVariant} className="flex flex-wrap gap-2 md:gap-3 mb-8 md:mb-16">
               {techStack.map((tech, i) => (
-                <span key={i} className="text-[10px] md:text-sm font-mono text-white/40 px-2 py-1 md:px-3 md:py-1 border border-white/10 rounded">
+                <span key={i} className="text-[9px] md:text-xs font-mono text-white/40 px-2 py-1 md:px-3 md:py-1 border border-white/10 rounded">
                   {tech}
                 </span>
               ))}
@@ -127,7 +127,7 @@ export function HeroIntroduction() {
               <motion.div 
                 animate={{ y: [0, 5, 0] }}
                 transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                className="text-sm font-mono tracking-widest text-white/40 uppercase"
+                className="text-xs font-mono tracking-widest text-white/40 uppercase"
               >
                 ↓ Explore My Engineering Journey
               </motion.div>
