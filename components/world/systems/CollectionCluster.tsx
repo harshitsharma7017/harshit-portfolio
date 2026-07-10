@@ -117,14 +117,12 @@ export function CollectionCluster({
       <mesh>
         <icosahedronGeometry args={[radius, 1]} />
         {variant === "bright" ? (
-          <meshPhysicalMaterial
+          <meshStandardMaterial
             color="#888888"
             roughness={0.1}
-            metalness={0.8}
-            transmission={0.9}
-            thickness={0.5}
+            metalness={0.9}
             transparent
-            opacity={1}
+            opacity={0.6}
             side={THREE.DoubleSide}
           />
         ) : (

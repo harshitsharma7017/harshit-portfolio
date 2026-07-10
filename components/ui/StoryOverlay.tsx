@@ -253,7 +253,7 @@ function StoryBlock({ story }: { story: StoryContent }) {
 
   return (
     <motion.div
-      className={`${positionClasses} flex flex-col gap-1 max-w-xl md:w-full bg-black/20 p-4 md:p-6 rounded-lg backdrop-blur-sm`}
+      className={`${positionClasses} flex flex-col gap-1 max-w-xl md:w-full bg-black/60 p-4 md:p-6 rounded-lg`}
       variants={variants[story.animation]}
       initial="initial"
       animate="animate"
@@ -376,7 +376,7 @@ function ContactTerminalUI() {
     if (commands.find((c) => c.cmd === cmd)) {
       if (cmd === "linkedin") window.open("https://www.linkedin.com/in/harshit-sharma-backend-developer", "_blank");
       if (cmd === "github") window.open("https://github.com/harshitsharma7017", "_blank");
-      if (cmd === "resume") window.open("/resume.pdf", "_blank");
+      if (cmd === "resume") window.open("/Harshit_resume_latest.pdf", "_blank");
       if (cmd === "email") window.location.href = "mailto:harshit.sharma8532@gmail.com";
       
       setTerminalCommand(cmd);
@@ -389,7 +389,7 @@ function ContactTerminalUI() {
   return (
     <div className="w-full h-full relative pointer-events-none">
       {/* Commands List - Bottom Left */}
-      <div className="absolute bottom-[env(safe-area-inset-bottom,2rem)] md:bottom-24 left-6 md:left-12 flex flex-col gap-4 text-white p-6 bg-black/40 backdrop-blur-md rounded-lg border border-white/10 w-[90%] max-w-xs md:max-w-sm pointer-events-auto">
+      <div className="absolute bottom-[env(safe-area-inset-bottom,2rem)] md:bottom-24 left-6 md:left-12 flex flex-col gap-4 text-white p-6 bg-black/80 rounded-lg border border-white/10 w-[90%] max-w-xs md:max-w-sm pointer-events-auto">
         <div className="text-xs tracking-widest text-white/40 uppercase mb-2">Terminal Access</div>
         <div className="flex flex-col gap-2 font-mono text-sm md:text-base text-white/80">
           {commands.map((c) => (
@@ -402,7 +402,7 @@ function ContactTerminalUI() {
       </div>
 
       {/* Input / Output - Center */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-4 text-white p-6 bg-black/60 backdrop-blur-md rounded-lg border border-white/10 w-[90%] max-w-lg pointer-events-auto">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-4 text-white p-6 bg-black/80 rounded-lg border border-white/10 w-[90%] max-w-lg pointer-events-auto">
         {state.terminalCommand ? (
           <>
             <div className="text-xs tracking-widest text-white/40 uppercase">Output: {state.terminalCommand}</div>
@@ -424,7 +424,7 @@ function ContactTerminalUI() {
             )}
             {state.terminalCommand === "resume" && (
               <div className="text-base md:text-lg font-mono">
-                <a href="/resume.pdf" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors">View Resume PDF</a>
+                <a href="/Harshit_resume_latest.pdf" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors">View Resume PDF</a>
               </div>
             )}
             {state.terminalCommand === "connect" && (
